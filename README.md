@@ -16,12 +16,12 @@ Here is a [video demonstration](Demo.mkv) of how the program works.
 ## Requirements
 This section covers the required installations for Classroom Manager to run.
 
-# Java
+### Java
 Java is the language that Classroom Manager is written in and must be installed to run the program.  Go to https://www.oracle.com/java/technologies/downloads/#jdk20 to download Java 20.
 
 Click on the link beside the x64 installer to download it. Once finished, open the .exe file and follow the prompts to install Java 20.
 
-# MySQL
+### MySQL
 MySQL is the database used to hold student information, contact information, attendance logs, and configurations. This section outlines how to download, install, and configure MySQL.
 
 **Step 1: Download MySQL**
@@ -55,7 +55,7 @@ In the next window, the Sample Databases are not needed. Leave them unchecked an
 In the Apply Configuration screen, click **Execute**. Once it is complete, click **Next >**.
 Click **Finish** once the configuration is complete.
 
-# HeidiSQL
+### HeidiSQL
 HeidiSQL is a user interface used to access the MySQL database. If you prefer MySQL Workbench and are familiar with the process to install it, this section can be skipped. However, the rest of this guide will use HeidiSQL for importing the database.
 
 **Step 1: Download and Install HeidiSQL**
@@ -78,7 +78,7 @@ Click **Open**. In the next window, click **File > Run SQL File** and choose **_
 ## APIs Used
 This section discusses the APIs used by Classroom Manager and how to link them to the program.  These services can be turned on and off through the **Configurations** window of the program.  Each API provides extensive documentation on how to create an account and where to find the necessary properties.  For brevity, this section will focus on outlining where to insert these properties to link them to Classroom Manager.
 
-# Twilio 
+### Twilio 
 Twilio allows the program to send text messages to parents when students arrive and are scheduled to leave the centre.
 
 Create a Twilio account at https://www.twilio.com/
@@ -87,14 +87,14 @@ Log in to your new account.  On the dashboard, there is a pane called **Account 
 
 In addition, a phone number must be purchased, and this property needs to be entered beside **twilio_from=**.
 
-# Acuity Scheduling
+### Acuity Scheduling
 Acuity Scheduling keeps track of when students are scheduled to be in the class and how long their appointments are.  When students arrive outside of their appointment slot, the instructor is alerted by email through the Gmail API (explained in the next section).
 
 Create an Acuity Scheduuling account at https://acuityscheduling.com/
 
 The API credentials needed can be found at https://developers.acuityscheduling.com/reference/quick-start under **Authentication**.  The User ID and API Key must be added to **acuity_user_id=** and **acuity_api_key=**, respectively.
 
-# Gmail
+### Gmail
 Since there are limited slots in the classroom, the instructor needs to know immediately which students arrive outside of their appointment slots.  The Gmail API allows the programs to send email alerts to the instructor when a student's sign-in time does not match their appointment per Acuity Scheduling (discussed in the previous section).  The email address used to send and receive these messages will be the same Gmail account.
 
 Go to https://console.cloud.google.com/apis/ and choose the Google account that the messages will be sent to and from.
