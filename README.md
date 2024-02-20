@@ -2,10 +2,10 @@
 Classroom Manager is a program I developed to help manage student flow in and out of the classroom for local Kumon Centres.  
 
 This program tracks students as they arrive and leave the centre.  When a student signs in, their name is added to the display projected to the classroom.  As the class progresses, the student's colour based the following:
-    - White: The student does not require special notice.
-    - Blue: The student needs to change subject.
-    - Yellow: The student's appointment time is almost elapsed and the student needs to start packing up.
-    - Red: The student has exceeded their appointment time and must leave as soon as possible.
+- White: The student does not require special notice.
+- Blue: The student needs to change subject.
+- Yellow: The student's appointment time is almost elapsed and the student needs to start packing up.
+- Red: The student has exceeded their appointment time and must leave as soon as possible.
 These are the default colours and can be changed in the program's **Configuration** screen.
 
 When a student signs in or out, a text is sent to their parent(s)/guardian(s) to notify them.  If a student arrives outside of their scheduled appointment, an email alert is sent to the instructor.
@@ -40,16 +40,16 @@ Once the Wizard is complete, check **“Run MySQL Configurator”** and click **
 Now that MySQL is installed, it needs to be configured.
 On the welcome screen , click **Next >**.
 In the Type and Networking screen, the defaults can be used, using the following properties:
-    - Config Type: Development Computer
-    - Connectivity: TCP/IP, Port: 3306, X Protocol Port: 33060
-    - Check "Open Windows Firewall ports for network access"
+- Config Type: Development Computer
+- Connectivity: TCP/IP, Port: 3306, X Protocol Port: 33060
+- Check "Open Windows Firewall ports for network access"
 In the Accounts and Roles screen, choose a password for the root (primary admin) user of the database. If additional users are needed, they can be added using the Add User button. **Keep this password in a safe place and do not forget it.**
 Open **credentials.properties** in the root folder of this repository. Add your password beside **pass=** to the root password for MySQL.
 On the Windows Service screen of the MySQL setup, the default settings can be kept:
-    - Check "Configure MySQL Server as a Windows Service
-    - Windows Service Name: keep default
-    - Check "Start the MySQL Server at System Startup"
-    - Run Windows As... Standard System Account
+- Check "Configure MySQL Server as a Windows Service
+- Windows Service Name: keep default
+- Check "Start the MySQL Server at System Startup"
+- Run Windows As... Standard System Account
 In the Server File Permissions screen, the first option can be chosen (**“Yes, grant full access to the user running the Windows Service (if applicable) and the administrators group only. Other users and groups will not have access.”**). However, this assumes the computer that the program is running on is only accessed by trusted persons. Keep in mind this database will contain student name and contact information.
 In the next window, the Sample Databases are not needed. Leave them unchecked and click **Next >**.
 In the Apply Configuration screen, click **Execute**. Once it is complete, click **Next >**.
@@ -61,8 +61,8 @@ HeidiSQL is a user interface used to access the MySQL database. If you prefer My
 **Step 1: Download and Install HeidiSQL**
 Download the latest version of HeidiSQL (https://www.heidisql.com/download.php).
 Open the downloaded .exe file and choose who to install HeidiSQL for.
-    - If the program will be used on multiple accounts, choose “Install for all users (recommend)”.
-    - If the program will only be used on one account, choose “Install for me only”.
+- If the program will be used on multiple accounts, choose “Install for all users (recommend)”.
+- If the program will only be used on one account, choose “Install for me only”.
 Accept the License Agreement and click **Next**.
 Choose the folder destination where HeidiSQL will be installed and click **Next**.
 A Start Menu folder is not required, but is optional.
