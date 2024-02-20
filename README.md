@@ -25,58 +25,52 @@ Click on the link beside the x64 installer to download it. Once finished, open t
 ### MySQL
 MySQL is the database used to hold student information, contact information, attendance logs, and configurations. This section outlines how to download, install, and configure MySQL.
 
-**Step 1: Download MySQL**
-Download and install MySQL Community Server from https://dev.mysql.com/downloads/mysql/. This program was created using MySQL Community Server 8.0.34 but you can choose the latest version. Select your version of choice, operating system, and preferred installer.
+**Step 1: Download MySQL.**  Download and install MySQL Community Server from https://dev.mysql.com/downloads/mysql/. Classroom Manager was created using MySQL Community Server 8.0.34 but you can choose the latest version. Select your version of choice, operating system, and preferred installer.
 You will then be asked to log in or create an account. If you choose to continue the download without an account, click **“No thanks, just start my download”** on the bottom of the screen.
 
-**Step 2: Launch the MySQL Server Setup Wizard**
-Make sure you are logged in as an Administrator as this step requires the installer to make changes to your computer. Open the file you downloaded in Step 1.
-On the welcome screen, click **Next**.
-On the End-User License Agreement screen, check **“I accept the terms in the License Agreement”** and click **Next**.
-On the Choose Setup Type screen, click **Typical** then click **Next**.
-Click **Install** on the next screen.
-Once the Wizard is complete, check **“Run MySQL Configurator”** and click **Finish**.
+**Step 2: Launch the MySQL Server Setup Wizard.**  Make sure you are logged in as an Administrator as this step requires the installer to make changes to your computer.
+- Open the file you downloaded in Step 1.
+- On the welcome screen, click **Next**.
+- On the End-User License Agreement screen, check **“I accept the terms in the License Agreement”** and click **Next**.
+- On the Choose Setup Type screen, click **Typical** then click **Next**.
+- Click **Install** on the next screen.
+- Once the Wizard is complete, check **“Run MySQL Configurator”** and click **Finish**.
 
-**Step 3: Configure MySQL**
-Now that MySQL is installed, it needs to be configured.
-On the welcome screen , click **Next >**.
-In the Type and Networking screen, the defaults can be used, using the following properties:
-- Config Type: Development Computer
-- Connectivity: TCP/IP, Port: 3306, X Protocol Port: 33060
-- Check "Open Windows Firewall ports for network access"
-
-In the Accounts and Roles screen, choose a password for the root (primary admin) user of the database. If additional users are needed, they can be added using the Add User button. **Keep this password in a safe place and do not forget it.**
-Open **credentials.properties** in the root folder of this repository. Add your password beside **pass=** to the root password for MySQL.
-On the Windows Service screen of the MySQL setup, the default settings can be kept:
-- Check "Configure MySQL Server as a Windows Service
-- Windows Service Name: keep default
-- Check "Start the MySQL Server at System Startup"
-- Run Windows As... Standard System Account
-
-In the Server File Permissions screen, the first option can be chosen (**“Yes, grant full access to the user running the Windows Service (if applicable) and the administrators group only. Other users and groups will not have access.”**). However, this assumes the computer that the program is running on is only accessed by trusted persons. Keep in mind this database will contain student name and contact information.
-In the next window, the Sample Databases are not needed. Leave them unchecked and click **Next >**.
-In the Apply Configuration screen, click **Execute**. Once it is complete, click **Next >**.
-Click **Finish** once the configuration is complete.
+**Step 3: Configure MySQL.**  Now that MySQL is installed, it needs to be configured.
+- On the welcome screen , click **Next >**.
+- In the Type and Networking screen, the defaults can be used, using the following properties:
+   - Config Type: Development Computer
+   - Connectivity: TCP/IP, Port: 3306, X Protocol Port: 33060
+   - Check "Open Windows Firewall ports for network access"
+- In the Accounts and Roles screen, choose a password for the root (primary admin) user of the database. If additional users are needed, they can be added using the Add User button. **Keep this password in a safe place and do not forget it.**
+- Open **credentials.properties** in the root folder of this repository. Add your password beside **pass=** to the root password for MySQL.
+- On the Windows Service screen of the MySQL setup, the default settings can be kept:
+   - Check "Configure MySQL Server as a Windows Service
+   - Windows Service Name: keep default
+   - Check "Start the MySQL Server at System Startup"
+   - Run Windows As... Standard System Account
+- In the Server File Permissions screen, the first option can be chosen (**“Yes, grant full access to the user running the Windows Service (if applicable) and the administrators group only. Other users and groups will not have access.”**). However, this assumes the computer that the program is running on is only accessed by trusted persons. Keep in mind this database will contain student name and contact information.
+- In the next window, the Sample Databases are not needed. Leave them unchecked and click **Next >**.
+- In the Apply Configuration screen, click **Execute**. Once it is complete, click **Next >**.
+- Click **Finish** once the configuration is complete.
 
 ### HeidiSQL
 HeidiSQL is a user interface used to access the MySQL database. If you prefer MySQL Workbench and are familiar with the process to install it, this section can be skipped. However, the rest of this guide will use HeidiSQL for importing the database.
 
-**Step 1: Download and Install HeidiSQL**
-Download the latest version of HeidiSQL (https://www.heidisql.com/download.php).
-Open the downloaded .exe file and choose who to install HeidiSQL for.
-- If the program will be used on multiple accounts, choose “Install for all users (recommend)”.
-- If the program will only be used on one account, choose “Install for me only”.
+**Step 1: Download and Install HeidiSQL.**  Download the latest version of HeidiSQL (https://www.heidisql.com/download.php).
+- Open the downloaded .exe file and choose who to install HeidiSQL for.
+   - If the program will be used on multiple accounts, choose “Install for all users (recommend)”.
+   - If the program will only be used on one account, choose “Install for me only”.
+- Accept the License Agreement and click **Next**.
+- Choose the folder destination where HeidiSQL will be installed and click **Next**.
+- A Start Menu folder is not required, but is optional.
+- In the Set Additional Tasks window, check off **"Associate .SQL files with HeidiSQL"**.
+- Click **Install** and then launch HeidiSQL.
 
-Accept the License Agreement and click **Next**.
-Choose the folder destination where HeidiSQL will be installed and click **Next**.
-A Start Menu folder is not required, but is optional.
-In the Set Additional Tasks window, check off **"Associate .SQL files with HeidiSQL"**.
-Click **Install** and then launch HeidiSQL.
-
-**Step 2: Set up the database.**
-After launching HeidiSQL, click the **New** button on the bottom-left of the screen.
-Enter the root user credentials from the MySQL installation and choose Port 3306.
-Click **Open**. In the next window, click **File > Run SQL File** and choose **_install/kumon_db.sql** from this repository's root folder.  This file generates the database used by the program.
+**Step 2: Set up the database.**  After launching HeidiSQL, click the **New** button on the bottom-left of the screen.
+- Enter the root user credentials from the MySQL installation and choose Port 3306.
+- Click **Open**.
+- In the next window, click **File > Run SQL File** and choose **_install/kumon_db.sql** from this repository's root folder.  This file generates the database used by the program.
 
 
 ## APIs Used
