@@ -36,16 +36,18 @@ public class AcuityHttpClient {
 		replace.put("!", "/!");
 		replace.put("^", "/^");
 	}
-	
-	private AcuityHttpClient() { }
-	
+
+	private AcuityHttpClient() {
+	}
+
 	private static final String getBasicAuthenticationHeader() {
-	    String valueToEncode = USER + ":" + TOKEN;
-	    return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
+		String valueToEncode = USER + ":" + TOKEN;
+		return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
 	}
 
 	/**
 	 * Returns one appointment record for corresponding date and student
+	 * 
 	 * @param dateTime
 	 * @param firstName
 	 * @param lastName
@@ -53,7 +55,8 @@ public class AcuityHttpClient {
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
-	public static Appointment getAppointment(LocalDateTime dateTime, String firstName, String lastName) throws IOException, InterruptedException {
+	public static Appointment getAppointment(LocalDateTime dateTime, String firstName, String lastName)
+			throws IOException, InterruptedException {
 
 		String date = dateTime.getMonth() + " " + dateTime.getDayOfMonth() + ", " + dateTime.getYear();
 
@@ -73,14 +76,16 @@ public class AcuityHttpClient {
 
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<Appointment> appointments = mapper.readValue(response.body(), new TypeReference<List<Appointment>>() {});
-		
-		// If more than one appointment is made in a day, the first record will be returned
+		List<Appointment> appointments = mapper.readValue(response.body(), new TypeReference<List<Appointment>>() {
+		});
+
+		// If more than one appointment is made in a day, the first record will be
+		// returned
 		return appointments.size() > 0 ? appointments.get(0) : null;
 	}
 
 	static List<Appointment> appointments = new ArrayList<>();
-	
+
 	public static Appointment getAsyncAppointment(LocalDateTime dateTime, String firstName, String lastName) {
 		String date = dateTime.getMonth() + " " + dateTime.getDayOfMonth() + ", " + dateTime.getYear();
 		ObjectMapper mapper = new ObjectMapper();
@@ -91,33 +96,34 @@ public class AcuityHttpClient {
 				+ "firstName=" + URLEncoder.encode(firstName, StandardCharsets.UTF_8) + "&"
 				+ "lastName=" + URLEncoder.encode(lastName, StandardCharsets.UTF_8) + "&"
 				+ "excludeForms=true&direction=ASC";
-		
+
 		AsyncHttpClient client = new DefaultAsyncHttpClient();
 		client.prepare("GET", url)
-		  .setHeader("accept", "application/json")
-		  .setHeader("authorization", getBasicAuthenticationHeader())
-		  .execute()
-		  .toCompletableFuture()
-		  .thenAccept(res -> {
-			try {
-				appointments = mapper.readValue(res.getResponseBody(), new TypeReference<List<Appointment>>() {});
-			} catch (JsonProcessingException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		})
-		  .join();
+				.setHeader("accept", "application/json")
+				.setHeader("authorization", getBasicAuthenticationHeader())
+				.execute()
+				.toCompletableFuture()
+				.thenAccept(res -> {
+					try {
+						appointments = mapper.readValue(res.getResponseBody(), new TypeReference<List<Appointment>>() {
+						});
+					} catch (JsonProcessingException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				})
+				.join();
 
 		try {
 			client.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return appointments != null && appointments.size() > 0 ? appointments.get(0) : null;
 	}
-	
-//	public static void main(String[] args) {
-//		getAsyncAppointment(LocalDateTime.now(), "Draco", "Malfoy");
-//	}
+
+	// public static void main(String[] args) {
+	// getAsyncAppointment(LocalDateTime.now(), "Draco", "Malfoy");
+	// }
 }

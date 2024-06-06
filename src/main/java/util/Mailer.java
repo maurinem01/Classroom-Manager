@@ -39,108 +39,107 @@ import static javax.mail.Message.RecipientType.TO;
 
 public class Mailer {
 
-    private static final String TO_EMAIL = Config.getCredentials().get("alert_email");
-    private static final String FROM_EMAIL = "Classroom Manager<" + TO_EMAIL +">";
-    private final Gmail service;
+	private static final String TO_EMAIL = Config.getCredentials().get("alert_email");
+	private static final String FROM_EMAIL = "Classroom Manager<" + TO_EMAIL + ">";
+	private final Gmail service;
 
-    public Mailer() throws Exception {
-        NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
-        GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
-        service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
-                .setApplicationName("Kumon Acuity Appointment Alert")
-                .build();
-    }
+	public Mailer() throws Exception {
+		NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+		GsonFactory jsonFactory = GsonFactory.getDefaultInstance();
+		service = new Gmail.Builder(httpTransport, jsonFactory, getCredentials(httpTransport, jsonFactory))
+				.setApplicationName("Kumon Acuity Appointment Alert")
+				.build();
+	}
 
-    private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory)
-            throws IOException {
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory, 
-        		new InputStreamReader(Mailer.class.getResourceAsStream("gmailClientSecret.json")));
+	private static Credential getCredentials(final NetHttpTransport httpTransport, GsonFactory jsonFactory)
+			throws IOException {
+		GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(jsonFactory,
+				new InputStreamReader(Mailer.class.getResourceAsStream("gmailClientSecret.json")));
 
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
-                .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
-                .setAccessType("offline")
-                .build();
+		GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+				httpTransport, jsonFactory, clientSecrets, Set.of(GMAIL_SEND))
+				.setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
+				.setAccessType("offline")
+				.build();
 
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
-    }
+		LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+		return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+	}
 
-    public void sendMail(String subject, String message) {
-        Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
-        MimeMessage email = new MimeMessage(session);
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        
-        try {
+	public void sendMail(String subject, String message) {
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+		MimeMessage email = new MimeMessage(session);
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+		try {
 			email.setFrom(new InternetAddress(FROM_EMAIL));
-	        email.addRecipient(TO, new InternetAddress(TO_EMAIL));
-	        email.setSubject(subject);
-	        email.setText(message);
+			email.addRecipient(TO, new InternetAddress(TO_EMAIL));
+			email.setSubject(subject);
+			email.setText(message);
 			email.writeTo(buffer);
-			
 
-	        byte[] rawMessageBytes = buffer.toByteArray();
-	        String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
-	        Message msg = new Message();
-	        msg.setRaw(encodedEmail);
+			byte[] rawMessageBytes = buffer.toByteArray();
+			String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
+			Message msg = new Message();
+			msg.setRaw(encodedEmail);
 
-	        try {
-	            msg = service.users().messages().send("me", msg).execute();
-	        } catch (GoogleJsonResponseException e) {
-	            GoogleJsonError error = e.getDetails();
-	            if (error.getCode() == 403) {
-	                System.err.println("Unable to send message: " + e.getDetails());
-	            } else {
-	                throw e;
-	            }
-	        }
+			try {
+				msg = service.users().messages().send("me", msg).execute();
+			} catch (GoogleJsonResponseException e) {
+				GoogleJsonError error = e.getDetails();
+				if (error.getCode() == 403) {
+					System.err.println("Unable to send message: " + e.getDetails());
+				} else {
+					throw e;
+				}
+			}
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
 		}
 
-    }
-    
-    public void sendAttachment(String subject, String message, String file) {
-    	Properties props = new Properties();
-        Session session = Session.getDefaultInstance(props, null);
-        MimeMessage email = new MimeMessage(session);
+	}
+
+	public void sendAttachment(String subject, String message, String file) {
+		Properties props = new Properties();
+		Session session = Session.getDefaultInstance(props, null);
+		MimeMessage email = new MimeMessage(session);
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
-        Multipart multipart = new MimeMultipart();
-        MimeBodyPart mimeBodyPart = new MimeBodyPart();        
-        BodyPart bodyPart = new MimeBodyPart();
-        
-        try {
+		Multipart multipart = new MimeMultipart();
+		MimeBodyPart mimeBodyPart = new MimeBodyPart();
+		BodyPart bodyPart = new MimeBodyPart();
+
+		try {
 			mimeBodyPart.attachFile(new File(file));
-	        try {
+			try {
 				multipart.addBodyPart(mimeBodyPart);
 				bodyPart.setText(message);
 				multipart.addBodyPart(bodyPart);
 
 				email.setFrom(new InternetAddress(FROM_EMAIL));
-		        email.addRecipient(TO, new InternetAddress(TO_EMAIL));
-		        email.setSubject(subject);
-		        
+				email.addRecipient(TO, new InternetAddress(TO_EMAIL));
+				email.setSubject(subject);
+
 				email.setContent(multipart);
-		        
+
 				email.writeTo(buffer);
-		        
-		        byte[] rawMessageBytes = buffer.toByteArray();
-		        String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
-		        Message msg = new Message();
-		        msg.setRaw(encodedEmail);
-				
-		        try {
-		            msg = service.users().messages().send("me", msg).execute();
-		        } catch (GoogleJsonResponseException e) {
-		            GoogleJsonError error = e.getDetails();
-		            if (error.getCode() == 403) {
-		                System.err.println("Unable to send message: " + e.getDetails());
-		            } else {
-		                throw e;
-		            }
-		        }
+
+				byte[] rawMessageBytes = buffer.toByteArray();
+				String encodedEmail = Base64.encodeBase64URLSafeString(rawMessageBytes);
+				Message msg = new Message();
+				msg.setRaw(encodedEmail);
+
+				try {
+					msg = service.users().messages().send("me", msg).execute();
+				} catch (GoogleJsonResponseException e) {
+					GoogleJsonError error = e.getDetails();
+					if (error.getCode() == 403) {
+						System.err.println("Unable to send message: " + e.getDetails());
+					} else {
+						throw e;
+					}
+				}
 				System.out.println("SENT CLASS LOG");
 			} catch (MessagingException e) {
 				// POPUP??
@@ -149,7 +148,7 @@ public class Mailer {
 		} catch (IOException | MessagingException e) {
 			// POPUP???
 			e.printStackTrace();
-		}        
+		}
 
-    }
+	}
 }
