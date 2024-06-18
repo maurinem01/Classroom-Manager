@@ -24,7 +24,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jars/async-http-client-3.0.0.Beta2.jar"/>
 	<classpathentry kind="lib" path="jars/core-3.3.0.jar"/>
 	<classpathentry kind="lib" path="jars/jakarta.activation-2.0.1.jar"/>
 	<classpathentry kind="lib" path="jars/javase-3.3.0.jar"/>
