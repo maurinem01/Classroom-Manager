@@ -13,6 +13,23 @@ When a student signs in or out, a text is sent to their parent(s)/guardian(s) to
 
 Here is a [video demonstration](Demo.mkv) of how the program works.
 
+## Updates
+This section covers updates made to the project.
+
+### v1
+This version moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
+- **KUMON_DB**: The address to the database of format <server>/<dbName>
+- **KUMON_DB_USER**: Database username
+- **KUMON_DB_PASSWORD**: Database password
+- **KUMON_TWILIO_ACCOUNT_SID**: Twilio account SID
+- **KUMON_TWILIO_AUTH_TOKEN**: Twilio Auth Token
+- **KUMON_TWILIO_FROM**: Twilio "From" phone number
+- **KUMON_ACUITY_USER_ID**: Acuity User ID
+- **KUMON_ACUITY_API_KEY**: Acuity API Key
+- **KUMON_ALERT_EMAIL**: Email address to receive alert emails 
+
+Since the database is no longer local, session variables (namely, the connection timeout) cannot be changed.  Therefore, a singleton connection cannot be used, and all transactions require a new instance of dao.DBConnection.  This change is reflected in v1.  
+
 
 ## Requirements
 This section covers the required installations for Classroom Manager to run.
