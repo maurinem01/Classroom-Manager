@@ -18,7 +18,7 @@ This section covers updates made to the project.
 
 ### v1
 This version moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
-- **KUMON_DB**: The address to the database of format <server>/<dbName>
+- **KUMON_DB**: The address to the database of format {server}/{dbName}
 - **KUMON_DB_USER**: Database username
 - **KUMON_DB_PASSWORD**: Database password
 - **KUMON_TWILIO_ACCOUNT_SID**: Twilio account SID
@@ -61,7 +61,7 @@ You will then be asked to log in or create an account. If you choose to continue
    - Check "Open Windows Firewall ports for network access"
 - In the Accounts and Roles screen, choose a password for the root (primary admin) user of the database. If additional users are needed, they can be added using the Add User button. **Keep this password in a safe place and do not forget it.**
 - Set the following system environment variables:
-   - **KUMON_DB**: The address to the database of format <server>/<dbName> (default server is localhost)
+   - **KUMON_DB**: The address to the database of format {server}/{dbName} (default server is localhost)
    - **KUMON_DB_USER**: Database username (default root)
    - **KUMON_DB_PASSWORD**: Database password
 - On the Windows Service screen of the MySQL setup, the default settings can be kept:
