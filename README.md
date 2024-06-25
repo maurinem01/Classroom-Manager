@@ -16,7 +16,7 @@ Here is a [video demonstration](Demo.mkv) of how the program works.
 ## Updates
 This section covers updates made to the project.
 
-## v1
+### v1
 This version moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
 - **KUMON_DB**: The address to the database of format <server>/<dbName>
 - **KUMON_DB_USER**: Database username
