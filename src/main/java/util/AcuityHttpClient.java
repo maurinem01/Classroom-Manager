@@ -26,8 +26,10 @@ import object.Appointment;
 
 public class AcuityHttpClient {
 
-	private static String USER = Config.getCredentials().get("acuity_user_id");
-	private static String TOKEN = Config.getCredentials().get("acuity_api_key");
+	private static Map<String, String> env = System.getenv();
+
+	private static String USER = env.get("KUMON_ACUITY_USER_ID");
+	private static String TOKEN = env.get("KUMON_ACUITY_API_KEY");
 	private static HttpClient httpClient = HttpClient.newHttpClient();
 	private static Map<String, String> replace = new HashMap<>();
 

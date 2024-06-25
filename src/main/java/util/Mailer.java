@@ -1,5 +1,6 @@
 package util;
 
+import java.util.Map;
 import java.util.Properties;
 
 import java.io.ByteArrayOutputStream;
@@ -39,7 +40,8 @@ import static javax.mail.Message.RecipientType.TO;
 
 public class Mailer {
 
-	private static final String TO_EMAIL = Config.getCredentials().get("alert_email");
+	private static Map<String, String> env = System.getenv();
+	private static final String TO_EMAIL = env.get("KUMON_ALERT_EMAIL");
 	private static final String FROM_EMAIL = "Classroom Manager<" + TO_EMAIL + ">";
 	private final Gmail service;
 

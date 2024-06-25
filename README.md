@@ -13,6 +13,23 @@ When a student signs in or out, a text is sent to their parent(s)/guardian(s) to
 
 Here is a [video demonstration](Demo.mkv) of how the program works.
 
+## Updates
+This section covers updates made to the project.
+
+### v1
+This version moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
+- **KUMON_DB**: The address to the database of format {server}/{dbName}
+- **KUMON_DB_USER**: Database username
+- **KUMON_DB_PASSWORD**: Database password
+- **KUMON_TWILIO_ACCOUNT_SID**: Twilio account SID
+- **KUMON_TWILIO_AUTH_TOKEN**: Twilio Auth Token
+- **KUMON_TWILIO_FROM**: Twilio "From" phone number
+- **KUMON_ACUITY_USER_ID**: Acuity User ID
+- **KUMON_ACUITY_API_KEY**: Acuity API Key
+- **KUMON_ALERT_EMAIL**: Email address to receive alert emails 
+
+Since the database is no longer local, session variables (namely, the connection timeout) cannot be changed.  Therefore, a singleton connection cannot be used, and all transactions require a new instance of dao.DBConnection.  This change is reflected in v1.  
+
 
 ## Requirements
 This section covers the required installations for Classroom Manager to run.
@@ -43,7 +60,10 @@ You will then be asked to log in or create an account. If you choose to continue
    - Connectivity: TCP/IP, Port: 3306, X Protocol Port: 33060
    - Check "Open Windows Firewall ports for network access"
 - In the Accounts and Roles screen, choose a password for the root (primary admin) user of the database. If additional users are needed, they can be added using the Add User button. **Keep this password in a safe place and do not forget it.**
-- Open **credentials.properties** in the root folder of this repository. Add your password beside **pass=** to the root password for MySQL.
+- Set the following system environment variables:
+   - **KUMON_DB**: The address to the database of format {server}/{dbName} (default server is localhost)
+   - **KUMON_DB_USER**: Database username (default root)
+   - **KUMON_DB_PASSWORD**: Database password
 - On the Windows Service screen of the MySQL setup, the default settings can be kept:
    - Check "Configure MySQL Server as a Windows Service
    - Windows Service Name: keep default
@@ -81,16 +101,16 @@ Twilio allows the program to send text messages to parents when students arrive 
 
 Create a Twilio account at https://www.twilio.com/
 
-Log in to your new account.  On the dashboard, there is a pane called **Account Info** which contains an **Account SID** and **Auth Token**.  These two properties need to be entered in **credentials.properties** beside **twilio_account_sid=** and **twilio_auth_token=**, respectively.
+Log in to your new account.  On the dashboard, there is a pane called **Account Info** which contains an **Account SID** and **Auth Token**.  These two properties need to be set as system environment variables as **KUMON_TWILIO_ACCOUNT_SID** and **KUMON_TWILIO_AUTH_TOKEN**, respectively.
 
-In addition, a phone number must be purchased, and this property needs to be entered beside **twilio_from=**.
+In addition, a phone number must be purchased, and this property needs to be set as the system environment variable **KUMON_TWILIO_FROM**.
 
 ### Acuity Scheduling
 Acuity Scheduling keeps track of when students are scheduled to be in the class and how long their appointments are.  When students arrive outside of their appointment slot, the instructor is alerted by email through the Gmail API (explained in the next section).
 
 Create an Acuity Scheduuling account at https://acuityscheduling.com/
 
-The API credentials needed can be found at https://developers.acuityscheduling.com/reference/quick-start under **Authentication**.  The User ID and API Key must be added to **acuity_user_id=** and **acuity_api_key=**, respectively.
+The API credentials needed can be found at https://developers.acuityscheduling.com/reference/quick-start under **Authentication**.  The User ID and API Key must be set as system environment variables **KUMON_ACUITY_USER_ID** and **KUMON_ACUITY_API_KEY**, respectively.
 
 ### Gmail
 Since there are limited slots in the classroom, the instructor needs to know immediately which students arrive outside of their appointment slots.  The Gmail API allows the programs to send email alerts to the instructor when a student's sign-in time does not match their appointment per Acuity Scheduling (discussed in the previous section).  The email address used to send and receive these messages will be the same Gmail account.
@@ -103,4 +123,4 @@ Click on **Credentials**, **+ Create Credentials**, then **OAuth Client ID**.  T
 
 Back on the Google Cloud APIs & Services window, click on **OAuth consent screen**.  If this program is only for personal use or is used at a small scale, **External** User type will suffice.  Click **Create**.  On the next screen, click **Add or Remove Scopes**, then check off **../auth/gmail.compose**.  This will allow the program to send email messages to the connected Gmail account.
 
-Finally, open **credentials.properties** and enter the email address beside **alert_email=**.
+Finally, set the system environment variable **KUMON_ALERT_EMAIL** to this email address.
