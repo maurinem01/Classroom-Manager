@@ -12,11 +12,12 @@ import window.AppLaunch;
 
 /**
  * This class loads the program.
+ * 
  * @author Maurine
  */
 public class App {
 
-	public static void main(String[] args) {	
+	public static void main(String[] args) {
 		// This block of code changes all fonts in windows to be Config.FONT
 		Enumeration<Object> keys = UIManager.getDefaults().keys();
 		while (keys.hasMoreElements()) {
@@ -27,7 +28,7 @@ public class App {
 				UIManager.put(key, new FontUIResource(font));
 			}
 		}
-    	
-        EventQueue.invokeLater(() -> new AppLaunch());
+
+		EventQueue.invokeLater(() -> new AppLaunch());
 	}
 }
