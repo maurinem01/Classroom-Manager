@@ -3,18 +3,18 @@ package dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import util.Config;
+import java.util.Map;
 
 public class DBConnection {
 
-	private static String user = Config.getCredentials().get("user");
-	private static String pass = Config.getCredentials().get("pass");
-	private static String connectionStr = "jdbc:mysql://localhost/" + Config.getCredentials().get("name");
-	
-	private static Connection c;
-	
-	static {
+	private Map<String, String> env = System.getenv();
+	private String user = env.get("KUMON_DB_USER");
+	private String pass = env.get("KUMON_DB_PASSWORD");
+	private String connectionStr = "jdbc:mysql://" + env.get("KUMON_DB");
+
+	private Connection c;
+
+	{
 		try {
 			c = DriverManager.getConnection(connectionStr, user, pass);
 			System.out.println("Connection success");
@@ -25,9 +25,11 @@ public class DBConnection {
 		}
 	}
 
-	private DBConnection() { }
-	
-	
-	public static Connection getConn() { return c; }
-	
+	public DBConnection() {
+	}
+
+	public Connection getConn() {
+		return c;
+	}
+
 }
