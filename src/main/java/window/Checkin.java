@@ -13,10 +13,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.time.Duration;
+// import java.io.IOException;
+// import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+// import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +43,6 @@ import dao.IndicatorDAO;
 import dao.LogDAO;
 import dao.StudentDAO;
 import object.*;
-import util.AcuityHttpClient;
 import util.Config;
 import util.LeftPaneTableModel;
 import util.Mailer;
@@ -530,8 +529,8 @@ public class Checkin extends Window {
 				checkedInStudentsMap.put(keyToCheck, new Student(allStudentsMap.get(keyToCheck))); // creates new Student in
 																																														// checked-in students pane
 																																														// with time information
-				if (Config.LINK_ACUITY)
-					checkedInStudentsMap.get(keyToCheck).checkAppointment();
+				// if (Config.LINK_ACUITY)
+				// checkedInStudentsMap.get(keyToCheck).checkAppointment();
 				allStudentsMap.get(keyToCheck).signIn(); // changes text in sign-in pane to gray
 
 				int studentID = checkedInStudentsMap.get(keyToCheck).getID();
@@ -550,8 +549,9 @@ public class Checkin extends Window {
 				if (sendNotificationTexts)
 					Executors.newSingleThreadExecutor().execute(new SendMessage(keyToCheck, Config.TEXT_IN));
 
-				if (Config.LINK_ACUITY)
-					Executors.newSingleThreadExecutor().execute(new AppointmentAlert(checkInLogsMap.get(studentID)));
+				// if (Config.LINK_ACUITY)
+				// Executors.newSingleThreadExecutor().execute(new
+				// AppointmentAlert(checkInLogsMap.get(studentID)));
 			}
 		}
 
@@ -609,73 +609,78 @@ public class Checkin extends Window {
 		}
 	}
 
-	class AppointmentAlert implements Runnable {
-		/** Log containing student name and check in time */
-		private Log log;
+	// class AppointmentAlert implements Runnable {
+	// /** Log containing student name and check in time */
+	// private Log log;
 
-		public AppointmentAlert(Log log) {
-			this.log = log;
-		}
+	// public AppointmentAlert(Log log) {
+	// this.log = log;
+	// }
 
-		@Override
-		public void run() {
-			try {
-				Appointment appointment = AcuityHttpClient.getAppointment(
-						log.getSignIn(),
-						log.getStudent().getFName(),
-						log.getStudent().getLName());
+	// @Override
+	// public void run() {
+	// try {
+	// Appointment appointment = AcuityHttpClient.getAppointment(
+	// log.getSignIn(),
+	// log.getStudent().getFName(),
+	// log.getStudent().getLName());
 
-				boolean onTime = appointment != null && log.onTime(appointment);
+	// boolean onTime = appointment != null && log.onTime(appointment);
 
-				if (appointment != null) {
-					Object[] appointmentTime = Log.getTimeComponents(appointment.getTime());
+	// if (appointment != null) {
+	// Object[] appointmentTime = Log.getTimeComponents(appointment.getTime());
 
-					LocalTime appTime = LocalTime.of(
-							(int) appointmentTime[0],
-							(int) appointmentTime[1]);
-					LocalTime logTime = LocalTime.of(
-							(int) Log.getTimeComponents(log.formatSignIn())[0],
-							(int) Log.getTimeComponents(log.formatSignIn())[1]);
+	// LocalTime appTime = LocalTime.of(
+	// (int) appointmentTime[0],
+	// (int) appointmentTime[1]);
+	// LocalTime logTime = LocalTime.of(
+	// (int) Log.getTimeComponents(log.formatSignIn())[0],
+	// (int) Log.getTimeComponents(log.formatSignIn())[1]);
 
-					studentSystemLog.getLogger().info(
-							log.getStudent().getName() + " - " + onTime + " - "
-									+ Math.abs((Duration.between(appTime, logTime).getSeconds()) / 60) // time between in minutes
-									+ " mins");
-				} else {
-					studentSystemLog.getLogger().info(
-							log.getStudent().getName() + " - " + onTime + " - No appointment scheduled");
-				}
+	// studentSystemLog.getLogger().info(
+	// log.getStudent().getName() + " - " + onTime + " - "
+	// + Math.abs((Duration.between(appTime, logTime).getSeconds()) / 60) // time
+	// between in minutes
+	// + " mins");
+	// } else {
+	// studentSystemLog.getLogger().info(
+	// log.getStudent().getName() + " - " + onTime + " - No appointment scheduled");
+	// }
 
-				// GENERATE EMAIL
-				String date = log.getSignIn().getMonth() + " " + log.getSignIn().getDayOfMonth() + ", "
-						+ log.getSignIn().getYear();
-				String studentName = log.getStudent().getName();
-				String appointmentTimeStr = appointment != null ? appointment.getTime() : "Not scheduled";
-				String signInTime = log.formatSignIn();
-				String email = appointment != null && appointment.getEmail() != null && !appointment.getEmail().trim().isEmpty()
-						? appointment.getEmail()
-						: "Not available";
-				String phone = appointment != null && appointment.getPhone() != null && !appointment.getPhone().trim().isEmpty()
-						? appointment.getPhone()
-						: "Not available";
-				if (!onTime) {
-					new Mailer().sendMail(studentName.toUpperCase() + " - NOTICE",
-							date + "\n" +
-									studentName + " has signed in outside their scheduled appointment."
-									+ "\nAppointment time: " + appointmentTimeStr
-									+ "\nSign in time: " + signInTime
-									+ "\nEmail: " + email
-									+ "\nPhone: " + phone);
-				}
+	// // GENERATE EMAIL
+	// String date = log.getSignIn().getMonth() + " " +
+	// log.getSignIn().getDayOfMonth() + ", "
+	// + log.getSignIn().getYear();
+	// String studentName = log.getStudent().getName();
+	// String appointmentTimeStr = appointment != null ? appointment.getTime() :
+	// "Not scheduled";
+	// String signInTime = log.formatSignIn();
+	// String email = appointment != null && appointment.getEmail() != null &&
+	// !appointment.getEmail().trim().isEmpty()
+	// ? appointment.getEmail()
+	// : "Not available";
+	// String phone = appointment != null && appointment.getPhone() != null &&
+	// !appointment.getPhone().trim().isEmpty()
+	// ? appointment.getPhone()
+	// : "Not available";
+	// if (!onTime) {
+	// new Mailer().sendMail(studentName.toUpperCase() + " - NOTICE",
+	// date + "\n" +
+	// studentName + " has signed in outside their scheduled appointment."
+	// + "\nAppointment time: " + appointmentTimeStr
+	// + "\nSign in time: " + signInTime
+	// + "\nEmail: " + email
+	// + "\nPhone: " + phone);
+	// }
 
-			} catch (IOException | InterruptedException e) {
-				e.printStackTrace();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+	// } catch (IOException | InterruptedException e) {
+	// e.printStackTrace();
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
 
-	}
+	// }
 
 	/**
 	 * This model is used for the table holding signed in students.
