@@ -15,9 +15,9 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 // import java.io.IOException;
 // import java.time.Duration;
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 // import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+// import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +45,7 @@ import dao.StudentDAO;
 import object.*;
 import util.Config;
 import util.LeftPaneTableModel;
-import util.Mailer;
+// import util.Mailer;
 import util.PDFWriter;
 import util.ProgramLogger;
 import util.ProgramTable;
@@ -136,17 +136,18 @@ public class Checkin extends Window {
 				endClass();
 				if (!sent) {
 					sent = true;
-					if (Config.LINK_ACUITY) {
-						try {
-							new Mailer().sendAttachment(
-									"CLASS LOG FOR "
-											+ LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")).toUpperCase(),
-									"",
-									new PDFWriter().writeLog());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
+					// if (Config.LINK_ACUITY) {
+					// try {
+					// new Mailer().sendAttachment(
+					// "CLASS LOG FOR "
+					// + LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMM dd,
+					// yyyy")).toUpperCase(),
+					// "",
+					// new PDFWriter().writeLog());
+					// } catch (Exception e) {
+					// e.printStackTrace();
+					// }
+					// }
 				}
 			}
 		});
