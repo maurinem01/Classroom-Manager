@@ -13,6 +13,9 @@ When a student signs in or out, a text is sent to their parent(s)/guardian(s) to
 
 Here is a [video demonstration](Demo.mkv) of how the program works.
 
+## Demo
+Click [here](https://github.com/maurinem01/Classroom-Manager/tree/demo) to try out a demo version of this program.
+
 ## Updates
 This section covers updates made to the project.
 
