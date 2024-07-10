@@ -19,7 +19,8 @@ This is a demo version of the Classroom Manager App.  This program works by auto
     -  No status (generally, this should be left white to avoid confusion)
 3. Click on **Edit Students** and add some fictional student info.  To test the texting feature, a valid phone number is required, and the Notifications checkbox must be checked under Contacts.  **NOTE: The database used for the demo version is publicly accessed.  Please do not enter actual student information and ensure you delete your contact information from the Edit Students window once you've finished trying the program out.**
 4. From the main menu, click **Start Class**.
-    - Sign in by double clicking  your fictional student or highlight the name and click the **>** button.  This should send a check in message to the contact phone number associated with this student.
+    - Sign in by double clicking a student or highlight a name and click the **>** button.  Do this for a couple students some time apart to see the program sort them according to the description in the introduction of this README.
+    - Signing your fictional student in will send a check in message to the contact phone number associated with your student.
     - Leave the window open.  The colours will change according to what is set in the Configurations window.  For students enrolled in two subjects, the background will change when it is time to change subjects.  For all students, the background will also change when the warning time is reached, and when the session time has elapsed.  These times are not editable in the demo version.
     - Closing this window or manually signing out the student will also send a check out message.
 5.  From the main menu, click Send Text.  Double click on your fictional student and click **Send**.  This will send a text message to the contact phone number associated with this student.
@@ -30,3 +31,8 @@ This is a demo version of the Classroom Manager App.  This program works by auto
 - ~~Gmail~~ sends an email to the instructor when students check in outside of their time slot.  This is not applicable for the demo.
 - ~~PDF Writer~~ loads a PDF of all student notes to be printed at the start of a classroom session.  Since this is only a demo, this feature has been disabled to optimize program speed.
 - Twilio sends automated messages to the associated phone number(s) when a student is checked in/out.
+
+## Final Notes
+- The original program was designed to run on a local MySQL database with a singleton connection for fast responsiveness.  This demo creates a new connection for each transaction and closes it once the transaction is complete.  This means that the actual program performs a lot faster than the demo; this is crucial when signing in multiple students within a short timeframe.
+- The highest tier of Acuity is required to have access
+- As mentioned above, the database used for the demo version is publicly accessed.  Please do not enter actual student information and ensure you delete your contact information from the Edit Students window once you've finished trying the program out.
