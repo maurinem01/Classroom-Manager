@@ -21,8 +21,8 @@ This is a demo version of the Classroom Manager App.  This program works by auto
 4. From the main menu, click **Start Class**.
     - Sign in by double clicking  your fictional student or highlight the name and click the **>** button.  This should send a check in message to the contact phone number associated with this student.
     - Leave the window open.  The colours will change according to what is set in the Configurations window.  For students enrolled in two subjects, the background will change when it is time to change subjects.  For all students, the background will also change when the warning time is reached, and when the session time has elapsed.  These times are not editable in the demo version. 
-  - Closing this window or manually signing out the student will also send a check out message.
-4.  From the main menu, click Send Text.  Double click on your fictional student and click **Send**.  This will send a text message to the contact phone number associated with this student.
+      - Closing this window or manually signing out the student will also send a check out message.
+5.  From the main menu, click Send Text.  Double click on your fictional student and click **Send**.  This will send a text message to the contact phone number associated with this student.
 
 ## Program features
 - ~~Acuity~~ schedules students at specific time slots.  This is not applicable for the demo.
