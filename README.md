@@ -34,5 +34,6 @@ This is a demo version of the Classroom Manager App.  This program works by auto
 
 ## Final Notes
 - The original program was designed to run on a local MySQL database with a singleton connection for fast responsiveness.  This demo creates a new connection for each transaction and closes it once the transaction is complete.  This means that the actual program performs a lot faster than the demo; this is crucial when signing in multiple students within a short timeframe.
-- The highest tier of Acuity is required to have access
+- The highest tier of Acuity is required to have access to its API for integration with ClassroomManager.
+- As of creating this program, a free tier of the Gmail API was available and sufficient for what this program required.  There is no guarantee this will be the case in the future.
 - As mentioned above, the database used for the demo version is publicly accessed.  Please do not enter actual student information and ensure you delete your contact information from the Edit Students window once you've finished trying the program out.
