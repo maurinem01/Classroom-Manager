@@ -26,9 +26,8 @@ This is a demo version of the Classroom Manager App.  This program works by auto
 - Twilio sends automated messages to the associated phone number(s) when a student is checked in/out.
 
 The following are part of the full program but are not included in the demo:
-- ~~Acuity~~ schedules students at specific time slots.  This does not apply to the demo.
-- ~~Gmail~~ sends an email to the instructor when students check-in outside of their time slot.  This does not apply to the demo.
-- ~~PDF Writer~~ loads a PDF of all student notes to be printed at the start of a classroom session.  Since this is only a demo, this feature has been disabled to optimize program speed.
+- ~~Acuity and Gmail~~ are used to send an email to the instructor when students check in outside of their time slot.
+- ~~PDF Writer~~ loads a PDF of all student notes to be printed at the start of a classroom session.
 
 ## Final Notes
 - The original program was designed to run on a local MySQL database with a singleton connection for fast responsiveness.  This demo creates a new connection for each transaction and closes it once the transaction is complete.  This means that the actual program performs a lot faster than the demo; this is crucial when signing in multiple students within a short timeframe.
