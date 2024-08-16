@@ -19,6 +19,21 @@
 CREATE DATABASE IF NOT EXISTS `kumon_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `kumon_db`;
 
+-- Dumping structure for table kumon_db.acuity_log
+CREATE TABLE IF NOT EXISTS `acuity_log` (
+  `log_id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
+  `time_in` timestamp NOT NULL,
+  `time_out` timestamp NULL DEFAULT NULL,
+  `appointment` timestamp NULL DEFAULT NULL,
+  `on_time` bit(1) NOT NULL DEFAULT (0),
+  PRIMARY KEY (`log_id`) USING BTREE,
+  KEY `log_student_fk` (`student_id`) USING BTREE,
+  CONSTRAINT `acuity_log_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table kumon_db.acuity_log: ~0 rows (approximately)
+
 -- Dumping structure for table kumon_db.config
 CREATE TABLE IF NOT EXISTS `config` (
   `property` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0',
@@ -40,7 +55,7 @@ INSERT INTO `config` (`property`, `value`) VALUES
 	('color_subject_change_fg', '#000000'),
 	('color_warning_time_bg', '#FCF4A3'),
 	('color_warning_time_fg', '#000000'),
-	('link_acuity', 'false'),
+	('link_acuity', 'true'),
 	('send_messages', 'false'),
 	('session_length', '30'),
 	('text_in', 'MSG FROM #CENTRE_NAME# KUMON: #Student_First# has arrived at the center. This is an automated message, call #CENTRE_PHONE# for assistance. Text STOP to unsubscribe.'),
@@ -63,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `contact` (
   KEY `contact_relationship_fk` (`relationship_id`),
   CONSTRAINT `contact_relationship_fk` FOREIGN KEY (`relationship_id`) REFERENCES `relationship` (`relationship_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `contact_student_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table kumon_db.contact: ~0 rows (approximately)
 
@@ -81,19 +96,6 @@ INSERT INTO `indicator` (`indicator_id`, `color`, `definition`) VALUES
 	(402, '#FF0000', 'Centre Graded'),
 	(403, '#00FF00', 'Home Graded'),
 	(404, '#0000FF', 'Kumon Connect');
-
--- Dumping structure for table kumon_db.log
-CREATE TABLE IF NOT EXISTS `log` (
-  `log_id` int NOT NULL AUTO_INCREMENT,
-  `student_id` int NOT NULL,
-  `time_in` timestamp NOT NULL,
-  `time_out` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`log_id`),
-  KEY `log_student_fk` (`student_id`),
-  CONSTRAINT `log_student_fk` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Dumping data for table kumon_db.log: ~0 rows (approximately)
 
 -- Dumping structure for table kumon_db.relationship
 CREATE TABLE IF NOT EXISTS `relationship` (
@@ -124,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `student` (
   KEY `student_indicator_fk` (`indicator_id`),
   CONSTRAINT `student_indicator_fk` FOREIGN KEY (`indicator_id`) REFERENCES `indicator` (`indicator_id`),
   CONSTRAINT `student_subject_fk` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1059 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Dumping data for table kumon_db.student: ~0 rows (approximately)
 
