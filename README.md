@@ -13,11 +13,9 @@ When a student signs in or out, a text is sent to their parent(s)/guardian(s) to
 
 Here is a [video demonstration](Demo.mkv) of how the program works.
 
-## Updates
-This section covers updates made to the project.
+## code/remote_db/
 
-### v1
-This version moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
+The remote_db/ branch moves the database from localhost to the cloud.  For security, the credentials have been moved to environment variables.  The following environment variables need to be set:
 - **KUMON_DB**: The address to the database of format {server}/{dbName}
 - **KUMON_DB_USER**: Database username
 - **KUMON_DB_PASSWORD**: Database password
