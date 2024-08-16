@@ -5,11 +5,10 @@
 
 	<groupId>markhamdakota</groupId>
 	<artifactId>ClassroomManager</artifactId>
-	<version>1.0</version>
+	<version>1.1</version>
 
 	<name>ClassroomManager</name>
-	<!-- FIXME change it to the project's website -->
-	<url>http://www.example.com</url>
+	<url>https://github.com/maurinem01/Classroom-Manager</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

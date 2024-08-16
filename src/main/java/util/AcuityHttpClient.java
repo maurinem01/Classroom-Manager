@@ -108,7 +108,6 @@ public class AcuityHttpClient {
 						appointments = mapper.readValue(res.getResponseBody(), new TypeReference<List<Appointment>>() {
 						});
 					} catch (JsonProcessingException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				})
@@ -123,7 +122,4 @@ public class AcuityHttpClient {
 		return appointments != null && appointments.size() > 0 ? appointments.get(0) : null;
 	}
 
-	// public static void main(String[] args) {
-	// getAsyncAppointment(LocalDateTime.now(), "Draco", "Malfoy");
-	// }
 }

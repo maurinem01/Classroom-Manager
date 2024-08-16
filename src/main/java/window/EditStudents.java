@@ -116,15 +116,12 @@ public class EditStudents extends Window {
 	}
 
 	private void initLists() {
-		System.out.println("Info.initLists()");
 		if (allStudentsMap != null) {
 			allStudentsMap.clear();
-			System.out.println("Cleared existing student map");
 		}
 		allStudentsList.clear();
 		allStudentsMap = new StudentDAO().readStudentContactMap();
 
-		System.out.println(allStudentsMap.size() + " students loaded");
 		for (int i : allStudentsMap.keySet())
 			allStudentsList.add(allStudentsMap.get(i));
 
@@ -275,17 +272,22 @@ public class EditStudents extends Window {
 										.addGroup(studentInformationLayout.createSequentialGroup()
 												.addComponent(studentBirthdayLabel)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(studentBirthdayYear, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+												.addComponent(studentBirthdayYear, GroupLayout.PREFERRED_SIZE, 93,
+														GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(studentBirthdayMonth, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+												.addComponent(studentBirthdayMonth, GroupLayout.PREFERRED_SIZE, 104,
+														GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(studentBirthdayDay, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+												.addComponent(studentBirthdayDay, 0, GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))
 										.addGroup(studentInformationLayout.createSequentialGroup()
-												.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addGroup(studentInformationLayout
+														.createParallelGroup(GroupLayout.Alignment.LEADING)
 														.addComponent(studentFirstNameLabel)
 														.addComponent(studentLastNameLabel))
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addGroup(studentInformationLayout
+														.createParallelGroup(GroupLayout.Alignment.LEADING)
 														.addComponent(studentFirstNameTextField)
 														.addComponent(studentLastNameTextField)))
 										.addGroup(studentInformationLayout.createSequentialGroup()
@@ -294,7 +296,8 @@ public class EditStudents extends Window {
 												.addComponent(studentNotesTextField, GroupLayout.PREFERRED_SIZE, 325,
 														GroupLayout.PREFERRED_SIZE))
 										.addGroup(studentInformationLayout.createSequentialGroup()
-												.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+												.addGroup(studentInformationLayout
+														.createParallelGroup(GroupLayout.Alignment.LEADING)
 														.addGroup(studentInformationLayout.createSequentialGroup()
 																.addComponent(studentSubjectLabel)
 																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -305,19 +308,25 @@ public class EditStudents extends Window {
 																.addComponent(studentSubjectMathReading))
 														.addGroup(studentInformationLayout.createSequentialGroup()
 																.addComponent(studentNotesExpiryLabel)
-																.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-																.addComponent(studentNotesExpiryTextField, GroupLayout.PREFERRED_SIZE, 35,
+																.addPreferredGap(
+																		LayoutStyle.ComponentPlacement.UNRELATED)
+																.addComponent(studentNotesExpiryTextField,
+																		GroupLayout.PREFERRED_SIZE, 35,
 																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(studentNotesExpiryDateLabel, GroupLayout.PREFERRED_SIZE, 85,
+																.addComponent(studentNotesExpiryDateLabel,
+																		GroupLayout.PREFERRED_SIZE, 85,
 																		GroupLayout.PREFERRED_SIZE)
-																.addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+																.addPreferredGap(
+																		LayoutStyle.ComponentPlacement.UNRELATED)
 																.addComponent(studentTagLabel)
 																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(studentTagTextField, GroupLayout.PREFERRED_SIZE, 35,
+																.addComponent(studentTagTextField,
+																		GroupLayout.PREFERRED_SIZE, 35,
 																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-																.addComponent(studentTagComboBox, GroupLayout.PREFERRED_SIZE, 92,
+																.addComponent(studentTagComboBox,
+																		GroupLayout.PREFERRED_SIZE, 92,
 																		GroupLayout.PREFERRED_SIZE)))
 												.addGap(0, 0, Short.MAX_VALUE)))
 								.addContainerGap()));
@@ -326,22 +335,27 @@ public class EditStudents extends Window {
 						.addGroup(studentInformationLayout.createSequentialGroup()
 								.addContainerGap()
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-										.addComponent(studentFirstNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentFirstNameTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(studentFirstNameLabel))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(studentLastNameLabel)
-										.addComponent(studentLastNameTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentLastNameTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(studentBirthdayLabel)
-										.addComponent(studentBirthdayYear, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentBirthdayYear, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
-										.addComponent(studentBirthdayMonth, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentBirthdayMonth, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
-										.addComponent(studentBirthdayDay, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentBirthdayDay, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -352,18 +366,22 @@ public class EditStudents extends Window {
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(studentNotesLabel)
-										.addComponent(studentNotesTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentNotesTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(studentInformationLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(studentNotesExpiryLabel)
-										.addComponent(studentNotesExpiryTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentNotesExpiryTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(studentTagLabel)
-										.addComponent(studentTagTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentTagTextField, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE)
 										.addComponent(studentNotesExpiryDateLabel)
-										.addComponent(studentTagComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(studentTagComboBox, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addContainerGap(12, Short.MAX_VALUE)));
 
@@ -397,7 +415,8 @@ public class EditStudents extends Window {
 										.addGroup(contact1Layout.createSequentialGroup()
 												.addComponent(cCellNumberLabel1)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(cCellNumberTextField1, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+												.addComponent(cCellNumberTextField1, GroupLayout.DEFAULT_SIZE, 266,
+														Short.MAX_VALUE))
 										.addGroup(contact1Layout.createSequentialGroup()
 												.addComponent(cLastNameLabel1)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -409,22 +428,26 @@ public class EditStudents extends Window {
 								.addContainerGap()
 								.addGroup(contact1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cFirstNameLabel1)
-										.addComponent(cFirstNameTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cFirstNameTextField1, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cLastNameLabel1)
-										.addComponent(cLastNameTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cLastNameTextField1, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cCellNumberLabel1)
-										.addComponent(cCellNumberTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cCellNumberTextField1, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cEmailLabel1)
-										.addComponent(cEmailTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cEmailTextField1, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(cNotificationsCheckBox1)
@@ -455,7 +478,8 @@ public class EditStudents extends Window {
 										.addGroup(contact2Layout.createSequentialGroup()
 												.addComponent(cCellNumberLabel2)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(cCellNumberTextField2, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
+												.addComponent(cCellNumberTextField2, GroupLayout.DEFAULT_SIZE, 266,
+														Short.MAX_VALUE))
 										.addGroup(contact2Layout.createSequentialGroup()
 												.addComponent(cLastNameLabel2)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -470,22 +494,26 @@ public class EditStudents extends Window {
 								.addContainerGap()
 								.addGroup(contact2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cFirstNameLabel2)
-										.addComponent(cFirstNameTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cFirstNameTextField2, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cLastNameLabel2)
-										.addComponent(cLastNameTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cLastNameTextField2, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cCellNumberLabel2)
-										.addComponent(cCellNumberTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cCellNumberTextField2, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(contact2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
 										.addComponent(cEmailLabel2)
-										.addComponent(cEmailTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(cEmailTextField2, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(cNotificationsCheckBox2)
@@ -529,16 +557,20 @@ public class EditStudents extends Window {
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
 										.addGroup(layout.createSequentialGroup()
 												.addComponent(newStudentButton)
-												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED,
+														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(clearExpNotesButton))
 										.addComponent(leftPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
 												GroupLayout.PREFERRED_SIZE))
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-												.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-														.addComponent(studentInformation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+												.addGroup(layout
+														.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+														.addComponent(studentInformation, GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
 																Short.MAX_VALUE)
 														.addComponent(contactInformation))
 												.addGap(6, 6, 6))
@@ -553,13 +585,16 @@ public class EditStudents extends Window {
 								.addContainerGap()
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 										.addGroup(layout.createSequentialGroup()
-												.addComponent(studentInformation, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												.addComponent(studentInformation, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE)
 												.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-												.addComponent(contactInformation, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE))
+												.addComponent(contactInformation, GroupLayout.PREFERRED_SIZE, 218,
+														GroupLayout.PREFERRED_SIZE))
 										.addGroup(layout.createSequentialGroup()
 												.addGap(8, 8, 8)
-												.addComponent(leftPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+												.addComponent(leftPanel, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.PREFERRED_SIZE)))
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -631,7 +666,8 @@ public class EditStudents extends Window {
 		});
 
 		studentTagComboBox.addActionListener(e -> {
-			studentTagComboBox.setForeground(Color.decode(((Indicator) studentTagComboBox.getSelectedItem()).getColor()));
+			studentTagComboBox
+					.setForeground(Color.decode(((Indicator) studentTagComboBox.getSelectedItem()).getColor()));
 		});
 
 		studentNotesExpiryTextField.getDocument().addDocumentListener(new DocumentListener() {
@@ -666,7 +702,8 @@ public class EditStudents extends Window {
 				StudentDAO studentDAO = new StudentDAO();
 
 				if (studentsTable.getSelectedRowCount() > 0)
-					activeStudent = allStudentsList.get(studentsTable.convertRowIndexToModel(studentsTable.getSelectedRow()));
+					activeStudent = allStudentsList
+							.get(studentsTable.convertRowIndexToModel(studentsTable.getSelectedRow()));
 
 				try {
 					if ((studentFirstNameTextField.getText().trim().isEmpty())
@@ -682,7 +719,8 @@ public class EditStudents extends Window {
 						tag = studentTagTextField.getText();
 					else {
 						validSave = false;
-						JOptionPane.showMessageDialog(null, "Tag must be 2 characters.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Tag must be 2 characters.", "Error",
+								JOptionPane.ERROR_MESSAGE);
 						throw new ProgramException("Invalid tag entered");
 					}
 
@@ -691,18 +729,21 @@ public class EditStudents extends Window {
 						notes = studentNotesTextField.getText();
 						if (studentNotesExpiryTextField.getText().trim().isEmpty()) {
 							validSave = false;
-							JOptionPane.showMessageDialog(null, "Enter an expiry for this note.", "Error", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Enter an expiry for this note.", "Error",
+									JOptionPane.ERROR_MESSAGE);
 							throw new ProgramException("If note is filled, expiry text field must be filled");
 						}
 					}
 
 					if (studentBirthdayYear.getSelectedIndex() != 0 && studentBirthdayMonth.getSelectedIndex() != 0
 							&& studentBirthdayDay.getSelectedIndex() != 0)
-						birthday = studentBirthdayMonth.getSelectedItem() + "-" + studentBirthdayDay.getSelectedItem() + "-"
+						birthday = studentBirthdayMonth.getSelectedItem() + "-" + studentBirthdayDay.getSelectedItem()
+								+ "-"
 								+ studentBirthdayYear.getSelectedItem();
 					else {
 						validSave = false;
-						JOptionPane.showMessageDialog(null, "Enter a valid birthday.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Enter a valid birthday.", "Error",
+								JOptionPane.ERROR_MESSAGE);
 						throw new ProgramException("Birthday values must be parseable to Integer");
 					}
 
@@ -715,26 +756,28 @@ public class EditStudents extends Window {
 							subjectSelected = Subject.ALL;
 					} else {
 						validSave = false;
-						JOptionPane.showMessageDialog(null, "Enter a valid subject.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Enter a valid subject.", "Error",
+								JOptionPane.ERROR_MESSAGE);
 						throw new ProgramException("No subject chosen");
 					}
 
 					if (validSave) {
-						System.out.println("valid entry");
 						if (newStudent) {
-							// THIS IS WHERE I AM
 							newStudentEntry = new Student(tag, studentFirstNameTextField.getText(),
-									studentLastNameTextField.getText(), birthday, subjectSelected, notes, LocalDateTime.now(),
+									studentLastNameTextField.getText(), birthday, subjectSelected, notes,
+									LocalDateTime.now(),
 									studentIndicatorID);
 							studentDAO.create(newStudentEntry);
 							JOptionPane.showMessageDialog(null,
-									"Entry created for " + studentFirstNameTextField.getText() + " " + studentLastNameTextField.getText()
+									"Entry created for " + studentFirstNameTextField.getText() + " "
+											+ studentLastNameTextField.getText()
 											+ ".",
 									"New Entry", JOptionPane.INFORMATION_MESSAGE);
 						} else {
 							if (!studentNotesExpiryDateLabel.getText().trim().isEmpty()) {
-								String dateTime = studentNotesExpiryDateLabel.getText() + " 00:00"; // set expiry to 00:00 of
-																																										// notesExpiryDateLabel.getText()
+								String dateTime = studentNotesExpiryDateLabel.getText() + " 00:00"; // set expiry to
+																									// 00:00 of
+																									// notesExpiryDateLabel.getText()
 								DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 								activeStudent.setNotesExpiryDate(LocalDateTime.parse(dateTime, dateTimeFormat));
 							}
@@ -756,40 +799,38 @@ public class EditStudents extends Window {
 				}
 
 				if (newStudent) {
-					System.out.println("Created contact for new student " + studentFirstNameTextField.getText() + " "
-							+ studentLastNameTextField.getText());
 					createContact(cFirstNameTextField1, cLastNameTextField1, cCellNumberTextField1, cEmailTextField1,
 							cNotificationsCheckBox1, newStudentEntry.getID(), Contact.ONE);
 					createContact(cFirstNameTextField2, cLastNameTextField2, cCellNumberTextField2, cEmailTextField2,
 							cNotificationsCheckBox2, newStudentEntry.getID(), Contact.TWO);
 				} else {
 					if (activeStudent.getContact(Contact.ONE) == null) {
-						System.out.println("Trying to create contact 1 for existing student");
-						createContact(cFirstNameTextField1, cLastNameTextField1, cCellNumberTextField1, cEmailTextField1,
+						createContact(cFirstNameTextField1, cLastNameTextField1, cCellNumberTextField1,
+								cEmailTextField1,
 								cNotificationsCheckBox1, activeStudent.getID(), Contact.ONE);
 					}
 					if (activeStudent.getContact(Contact.TWO) == null) {
-						System.out.println("Trying to create contact 2 for existing student");
-						createContact(cFirstNameTextField2, cLastNameTextField2, cCellNumberTextField2, cEmailTextField2,
+						createContact(cFirstNameTextField2, cLastNameTextField2, cCellNumberTextField2,
+								cEmailTextField2,
 								cNotificationsCheckBox2, activeStudent.getID(), Contact.TWO);
 					}
 					if (activeStudent.getContact(Contact.ONE) != null) {
-						System.out.println("Updated contact 1 for existing student");
-						updateContact(c1, cFirstNameTextField1, cLastNameTextField1, cCellNumberTextField1, cEmailTextField1,
+						updateContact(c1, cFirstNameTextField1, cLastNameTextField1, cCellNumberTextField1,
+								cEmailTextField1,
 								cNotificationsCheckBox1);
 					}
 					if (activeStudent.getContact(Contact.TWO) != null) {
-						System.out.println("Updated contact 2 for existing student");
-						updateContact(c2, cFirstNameTextField2, cLastNameTextField2, cCellNumberTextField2, cEmailTextField2,
+						updateContact(c2, cFirstNameTextField2, cLastNameTextField2, cCellNumberTextField2,
+								cEmailTextField2,
 								cNotificationsCheckBox2);
 					}
 				}
 
 				if (validSave) {
-					System.out.println(studentIndicatorID);
 					if (!newStudent)
 						JOptionPane.showMessageDialog(null,
-								"Entry updated for " + studentFirstNameTextField.getText() + " " + studentLastNameTextField.getText()
+								"Entry updated for " + studentFirstNameTextField.getText() + " "
+										+ studentLastNameTextField.getText()
 										+ ".",
 								"Updated Entry", JOptionPane.INFORMATION_MESSAGE);
 					emptyFields();
@@ -827,13 +868,14 @@ public class EditStudents extends Window {
 					if (studentsTable.getSelectedRowCount() > 0) {
 						Student selectedStudent = allStudentsList
 								.get(studentsTable.convertRowIndexToModel(studentsTable.getSelectedRow()));
-						System.out.println(selectedStudent.getID() + " - " + selectedStudent.getName() + " ");
 						int delete = JOptionPane.showConfirmDialog(null,
-								"Are you sure you want to remove " + selectedStudent.getName() + "?", "Delete Confirmation",
+								"Are you sure you want to remove " + selectedStudent.getName() + "?",
+								"Delete Confirmation",
 								JOptionPane.YES_NO_OPTION);
 						if (delete == JOptionPane.YES_OPTION) {
-							new StudentDAO().delete(selectedStudent.getID()); // MySQL will handle deleting entries from log and
-																																// contact
+							new StudentDAO().delete(selectedStudent.getID()); // MySQL will handle deleting entries from
+																				// log and
+																				// contact
 							JOptionPane.showMessageDialog(null, "Deleted entry for " + selectedStudent.getName() + ".");
 						}
 					} else {
@@ -877,12 +919,17 @@ public class EditStudents extends Window {
 			if (activeStudent.getTag() != null) // display tag
 				studentTagTextField.setText(activeStudent.getTag());
 
-			if (activeStudent.getNotes() != null && !activeStudent.getNotes().trim().isEmpty()) { // display notes + expiry
+			if (activeStudent.getNotes() != null && !activeStudent.getNotes().trim().isEmpty()) { // display notes +
+																									// expiry
 				studentNotesTextField.setText(activeStudent.getNotes());
 				studentNotesExpiryTextField
 						.setText((ChronoUnit.DAYS.between(LocalDateTime.now(), activeStudent.getNotesExpiryDate())
-								+ ((activeStudent.getNotesExpiryDate().isAfter(LocalDateTime.now())) ? 1 : 0)) // make 2nd parameter
-																																																// inclusive if > 0
+								+ ((activeStudent.getNotesExpiryDate().isAfter(LocalDateTime.now())) ? 1 : 0)) // make
+																												// 2nd
+																												// parameter
+																												// inclusive
+																												// if >
+																												// 0
 								+ ""); // convert to String
 				studentNotesExpiryDateLabel.setText(dateFormat.format(activeStudent.getNotesExpiryDate()));
 			} else {
@@ -902,7 +949,7 @@ public class EditStudents extends Window {
 						cNotificationsCheckBox2);
 			}
 		} catch (ArrayIndexOutOfBoundsException ex) {
-			System.out.println("Student selection out of bounds.");
+			System.err.println("Student selection out of bounds.");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -954,7 +1001,8 @@ public class EditStudents extends Window {
 		try {
 			days = Integer.parseInt(studentNotesExpiryTextField.getText());
 		} catch (NumberFormatException ex) {
-			JOptionPane.showMessageDialog(this, "Enter a valid integer for expiry days.", "Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Enter a valid integer for expiry days.", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -966,7 +1014,6 @@ public class EditStudents extends Window {
 		ContactDAO contactDAO = new ContactDAO();
 		try {
 			if (contact != null) { // If contact already exists
-				System.out.println("Accessing " + contact.getName());
 				if ((!firstNameField.getText().trim().isEmpty()) && (!lastNameField.getText().trim().isEmpty())) {
 					contact.setFName(firstNameField.getText());
 					contact.setLName(lastNameField.getText());
@@ -976,10 +1023,10 @@ public class EditStudents extends Window {
 					contactDAO.update(contact);
 				} else if ((firstNameField.getText().trim().isEmpty()) && (lastNameField.getText().trim().isEmpty())
 						&& (phoneField.getText().trim().isEmpty()) && (emailField.getText().trim().isEmpty())) {
-					System.out.println("empty name - deleting " + contact.getName());
 					contactDAO.delete(contact);
 				} else {
-					JOptionPane.showMessageDialog(this, "Contact name fields be filled.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Contact name fields be filled.", "Error",
+							JOptionPane.ERROR_MESSAGE);
 					throw new ProgramException("Invalid update action");
 				}
 			}
@@ -1003,8 +1050,9 @@ public class EditStudents extends Window {
 				String phone = !phoneField.getText().trim().isEmpty() ? phoneField.getText() : "";
 				String email = !emailField.getText().trim().isEmpty() ? emailField.getText() : "";
 				boolean notifications = notificationsBox.isSelected();
-				contactDAO.create(new Contact(firstNameField.getText(), lastNameField.getText(), phone, email, notifications,
-						studentID, relID));
+				contactDAO.create(
+						new Contact(firstNameField.getText(), lastNameField.getText(), phone, email, notifications,
+								studentID, relID));
 			}
 		} catch (ProgramException e) {
 			System.err.println(e);
