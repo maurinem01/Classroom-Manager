@@ -14,6 +14,13 @@ When a student signs in or out, a text is sent to their parent(s)/guardian(s) to
 Here is a [video demonstration](Demo.mkv) of how the program works.
 
 
+## v1.1 Updates
+- A new log table in the database is required to make v1.1 run.  If updating from v1.0, run the query found in _install/kumon_db_v1.1_update.sql to create the new table.
+- The original program was designed to send email notifications when students come outside of their appointment slots.  In v1.1, the email feature can be enabled by following the instructions in this README, and can be disabled simply by removing the email in credentials.properties.
+- When the email feature is disabled, the attendance summary PDF opens at the end of the class session.
+- The attendance summary PDF includes appointment information.  If the student attends outside of this appointment, it is highlighted in yellow.
+
+
 ## Requirements
 This section covers the required installations for Classroom Manager to run.
 
