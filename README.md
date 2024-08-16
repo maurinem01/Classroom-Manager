@@ -11,8 +11,6 @@ These are the default colours and can be changed in the program's **Configuratio
 
 When a student signs in or out, a text is sent to their parent(s)/guardian(s) to notify them.  If a student arrives outside of their scheduled appointment, an email alert is sent to the instructor.
 
-Here is a [video demonstration](Demo.mkv) of how the program works.
-
 
 ## v1.1 Updates
 - A new log table in the database is required to make v1.1 run.  If updating from v1.0, run the query found in _install/kumon_db_v1.1_update.sql to create the new table.
