@@ -114,7 +114,7 @@ public class Checkin extends Window {
 	private String auth_token = Config.getCredentials().get("twilio_auth_token");
 	private String from = Config.getCredentials().get("twilio_from");
 
-	private boolean sent = false;
+	// private boolean sent = false;
 
 	public Checkin() {
 		try {
@@ -133,29 +133,29 @@ public class Checkin extends Window {
 			@Override
 			public void windowClosing(WindowEvent we) {
 				endClass();
-				if (!sent) {
-					sent = true;
-					if (Config.LINK_ACUITY) { // Create and email log
-						if (Config.SEND_EMAIL) {
-							try {
-								new Mailer().sendAttachment(
-										"CLASS LOG FOR " + LocalDateTime.now()
-												.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")).toUpperCase(),
-										"",
-										new PDFWriter().writeLog());
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						} else { // Create log only
-							try {
-								new PDFWriter().writeLog();
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							}
+				// if (!sent) {
+				// sent = true;
+				if (Config.LINK_ACUITY) { // Create and email log
+					if (Config.SEND_EMAIL) {
+						try {
+							new Mailer().sendAttachment(
+									"CLASS LOG FOR " + LocalDateTime.now()
+											.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")).toUpperCase(),
+									"",
+									new PDFWriter().writeLog());
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} else { // Create log only
+						try {
+							new PDFWriter().writeLog();
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
 						}
 					}
 				}
 			}
+			// }
 		});
 	}
 
@@ -299,13 +299,9 @@ public class Checkin extends Window {
 				int notesCol = 9;
 				int statusIdCol = 10;
 				int colorCol = 12;
-				String studentNotes = (String) this.getModel().getValueAt(convertRowIndexToModel(row), notesCol); // toString()
-																													// requires
-																													// object
-																													// to
-																													// not
-																													// be
-																													// null
+
+				// toString() requires object to be null
+				String studentNotes = (String) this.getModel().getValueAt(convertRowIndexToModel(row), notesCol);
 				Color indicatorColor = Color
 						.decode((String) this.getModel().getValueAt(convertRowIndexToModel(row), colorCol));
 
@@ -314,8 +310,8 @@ public class Checkin extends Window {
 						background = Config.NOTES_BG;
 						foreground = Config.NOTES_FG;
 					} else {
-						int statusID = (int) this.getModel().getValueAt(convertRowIndexToModel(row), statusIdCol); // status
-																													// id
+						// status id
+						int statusID = (int) this.getModel().getValueAt(convertRowIndexToModel(row), statusIdCol);
 						switch (statusID) {
 							case Student.OVER_TIME:
 								background = Config.OVER_TIME_BG;
@@ -518,10 +514,11 @@ public class Checkin extends Window {
 
 	private void endClass() {
 		checkedInStudentsTable.selectAll();
-		if (checkedInStudentsTable.getSelectedRowCount() != 0)
+		if (checkedInStudentsTable.getSelectedRowCount() != 0) {
 			checkOut();
-		else
+		} else {
 			messages.append("No more students to check out.\n");
+		}
 	}
 
 	private void checkinBtnMouseClicked(MouseEvent me) {
@@ -578,7 +575,6 @@ public class Checkin extends Window {
 
 		LogDAO saveLog = new LogDAO();
 		for (int i : checkedInStudentsTable.getSelectedRows()) {
-
 			keyToCheck = checkedInStudentsTable.getSelectedRowCount() != 1
 					? checkedInStudentsTableModel.convertIndexToKey(checkedInStudentsTable.convertRowIndexToModel(0))
 					: checkedInStudentsTableModel.convertIndexToKey(checkedInStudentsTable.convertRowIndexToModel(i));

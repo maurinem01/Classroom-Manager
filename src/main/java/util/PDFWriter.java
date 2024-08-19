@@ -4,6 +4,8 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.Files;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,6 +44,13 @@ public class PDFWriter {
 		HashMap<Integer, Student> students = new StudentDAO().readStudentIDMap();
 
 		String dest = "system\\pdf\\notes\\" + fileDate + "NOTES.pdf";
+
+		try {
+			Files.createDirectories(Paths.get("system\\pdf\\notes"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		PdfWriter writer = new PdfWriter(dest);
 		PdfDocument pdfDocument = new PdfDocument(writer);
 		pdfDocument.setDefaultPageSize(PageSize.LETTER);
@@ -104,6 +113,13 @@ public class PDFWriter {
 		Color conditionalColor;
 
 		String logFileName = "system\\pdf\\logs\\" + fileDate + "LOG.pdf";
+
+		try {
+			Files.createDirectories(Paths.get("system\\pdf\\logs"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		PdfWriter writer = new PdfWriter(logFileName);
 		PdfDocument pdfDocument = new PdfDocument(writer);
 		pdfDocument.setDefaultPageSize(PageSize.LETTER);

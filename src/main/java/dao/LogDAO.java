@@ -118,7 +118,7 @@ public class LogDAO {
 						rs.getDate("date").toLocalDate(),
 						rs.getTime("appt") != null ? rs.getTime("appt").toLocalTime() : null,
 						rs.getTime("in").toLocalTime(),
-						rs.getTime("out").toLocalTime(),
+						rs.getTime("out").toLocalTime() != null ? rs.getTime("out").toLocalTime() : null,
 						rs.getBoolean("onTime")));
 			}
 		} catch (SQLException e) {
