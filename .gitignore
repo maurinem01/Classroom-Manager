@@ -1,1 +1,4 @@
 /target/
+/system/
+/tokens/
+/credentials.properties
