@@ -5,7 +5,7 @@ This query merges two tables using the UNION operation:
 	
 To export to CSV using HeidiSQL:
 	1. Click Tools > Export Grid Rows
-	2. Under "Oytput target", choose "File"
+	2. Under "Output target", choose "File"
 	3. Click on the file folder icon and choose file destination
 	4. Under "Row selection", choose "Complete"
 	5. Click OK
