@@ -22,8 +22,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import object.Appointment;
+import model.Appointment;
 
+/**
+ * This class contains the HTTP functions used by the program to call Acuity
+ * Scheduling.
+ * 
+ * @author Maurine
+ */
 public class AcuityHttpClient {
 
 	private static String USER = Config.getCredentials().get("acuity_user_id");

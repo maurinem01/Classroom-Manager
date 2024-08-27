@@ -45,7 +45,7 @@ public class AppLaunch extends Window {
 
 	public AppLaunch() {
 		try {
-			img = ImageIO.read(getClass().getResource("MAIN.png"));
+			img = ImageIO.read(getClass().getResource(BASE + "MAIN.png"));
 		} catch (IOException e) {
 			System.err.println(e);
 		}

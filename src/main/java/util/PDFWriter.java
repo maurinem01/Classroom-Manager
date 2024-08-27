@@ -26,9 +26,15 @@ import com.itextpdf.layout.element.Table;
 
 import dao.LogDAO;
 import dao.StudentDAO;
-import object.Log;
-import object.Student;
+import model.Log;
+import model.Student;
 
+/**
+ * This class contains the functions used to create PDF files genereated by the
+ * program.
+ * 
+ * @author Maurine
+ */
 public class PDFWriter {
 
 	private String fileDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-hhmma-")).toUpperCase()

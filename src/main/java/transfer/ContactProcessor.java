@@ -4,11 +4,13 @@ import java.util.StringTokenizer;
 import java.util.concurrent.Callable;
 
 import dao.*;
-import object.*;
+import model.*;
 
 /**
- * This class reads the line from a String (contactRecord) and assigns the values to a Contact object.  
+ * This class reads the line from a String (contactRecord) and assigns the
+ * values to a Contact object.
  * Each Contact attribute is separated by a comma (,)
+ * 
  * @author Maurine
  *
  */
@@ -16,12 +18,12 @@ public class ContactProcessor implements Callable<Integer> {
 
 	private String contactRecord;
 	private ContactDAO dao;
-		
+
 	public ContactProcessor(String contactRecord, ContactDAO dao) {
 		this.contactRecord = contactRecord;
 		this.dao = dao;
 	}
-	
+
 	@Override
 	public Integer call() throws Exception {
 		int rows = 0;

@@ -41,7 +41,7 @@ import com.twilio.type.PhoneNumber;
 import dao.IndicatorDAO;
 import dao.LogDAO;
 import dao.StudentDAO;
-import object.*;
+import model.*;
 import util.AcuityHttpClient;
 import util.Config;
 import util.LeftPaneTableModel;
@@ -247,7 +247,7 @@ public class Checkin extends Window {
 		checkinButton = new JButton();
 		checkinButton.setPreferredSize(new Dimension(20, 20));
 		try {
-			Image rightArrow = ImageIO.read(getClass().getResource("RIGHT_ARROW.png"));
+			Image rightArrow = ImageIO.read(getClass().getResource(BASE + "RIGHT_ARROW.png"));
 			checkinButton.setIcon(new ImageIcon(rightArrow));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -707,10 +707,10 @@ public class Checkin extends Window {
 		private ImageIcon birthday, birthday2, birthday3, warning;
 
 		public CheckedInStudentsTableModel(HashMap<Integer, Student> studentMap) {
-			this.birthday = new ImageIcon(getClass().getResource("GIFT.png"));
-			this.birthday2 = new ImageIcon(getClass().getResource("GIFT2.png"));
-			this.birthday3 = new ImageIcon(getClass().getResource("GIFT3.png"));
-			this.warning = new ImageIcon(getClass().getResource("WARNING.gif"));
+			this.birthday = new ImageIcon(getClass().getResource(BASE + "GIFT.png"));
+			this.birthday2 = new ImageIcon(getClass().getResource(BASE + "GIFT2.png"));
+			this.birthday3 = new ImageIcon(getClass().getResource(BASE + "GIFT3.png"));
+			this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.gif"));
 			this.studentMap = studentMap;
 		}
 

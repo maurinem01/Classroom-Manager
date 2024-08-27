@@ -10,9 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import object.Log;
-import object.Student;
-import util.ProgramException;
+import exception.DatabaseOperationException;
+import model.Log;
+import model.Student;
 
 public class LogDAO {
 
@@ -55,14 +55,14 @@ public class LogDAO {
 			int result = stmt.executeUpdate();
 
 			if (result == 0)
-				throw new ProgramException(
+				throw new DatabaseOperationException(
 						"An error occured when creating checkIn log for student " + log.getStudent().getID() + ".");
 
 			try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
 				if (generatedKeys.next())
 					log.setID(generatedKeys.getInt(1));
 				else
-					throw new ProgramException("Creating contact failed, no ID obtained.");
+					throw new DatabaseOperationException("Creating contact failed, no ID obtained.");
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -80,7 +80,7 @@ public class LogDAO {
 			int result = stmt.executeUpdate();
 
 			if (result == 0)
-				throw new ProgramException(
+				throw new DatabaseOperationException(
 						"An error occured when updating checkOut log for student " + log.getStudent().getID() + ".");
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -97,7 +97,7 @@ public class LogDAO {
 			int result = stmt.executeUpdate();
 
 			if (result == 0)
-				throw new ProgramException(
+				throw new DatabaseOperationException(
 						"An error occured when updating checkOut log for student " + log.getStudent().getID() + ".");
 		} catch (SQLException e) {
 			System.err.println(e);

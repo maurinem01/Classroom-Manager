@@ -37,7 +37,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
 import dao.ConfigDAO;
-import object.Student;
+import model.Student;
 import util.Config;
 import util.ProgramTable;
 import util.TextConverter;
@@ -64,31 +64,35 @@ public class Configurations extends Window {
 	private JComboBox<String> timeFormatComboBox;
 	private DefaultComboBoxModel<String> timeFormatModel;
 	private JTextField sessionLengthTextField, warningTimeTextField;
-	
+
 	private JPanel coloursPanel;
-	private JLabel overTimeColourLabel, warningTimeColourLabel, changeSubjectColourLabel, noStatusColourLabel, notesColourLabel;
-	private JButton overTimeColourTextButton, overTimeBGColourButton, warningTimeTextColourButton, warningTimeBGColourButton, 
-		subjectChangeTextColourButton, subjectChangeBGColourButton, noStatusTextColourButton, noStatusBGColourButton, 
-		notesBGColourButton, notesTextColourButton;
+	private JLabel overTimeColourLabel, warningTimeColourLabel, changeSubjectColourLabel, noStatusColourLabel,
+			notesColourLabel;
+	private JButton overTimeColourTextButton, overTimeBGColourButton, warningTimeTextColourButton,
+			warningTimeBGColourButton,
+			subjectChangeTextColourButton, subjectChangeBGColourButton, noStatusTextColourButton,
+			noStatusBGColourButton,
+			notesBGColourButton, notesTextColourButton;
 
 	private JScrollPane previewPanel;
 	private JTable previewTable;
 	private DefaultTableModel previewTableModel;
 	private List<Student> previewTableData;
-	
+
 	private JButton saveButton, resetButton;
 
-	private static Color overTimeFG, overTimeBG, warningTimeFG, warningTimeBG, subjectChangeFG, subjectChangeBG, noStatusFG, noStatusBG, notesFG, notesBG;
-	
+	private static Color overTimeFG, overTimeBG, warningTimeFG, warningTimeBG, subjectChangeFG, subjectChangeBG,
+			noStatusFG, noStatusBG, notesFG, notesBG;
+
 	DateTimeFormatter timeFormat;
-	
+
 	public Configurations() {
 		initialValues();
 		initComponents();
 	}
-	
+
 	private void initialValues() {
-//		configurations = new ConfigDAO();
+		// configurations = new ConfigDAO();
 		overTimeFG = Config.OVER_TIME_FG;
 		overTimeBG = Config.OVER_TIME_BG;
 		warningTimeFG = Config.WARNING_TIME_FG;
@@ -99,19 +103,48 @@ public class Configurations extends Window {
 		noStatusBG = Config.NO_STATUS_BG;
 		notesFG = Config.NOTES_FG;
 		notesBG = Config.NOTES_BG;
-//		System.out.println("#"+Integer.toHexString(overTimeBG.getRGB()).substring(2).toUpperCase());
+		// System.out.println("#"+Integer.toHexString(overTimeBG.getRGB()).substring(2).toUpperCase());
 	}
-	
-	public static Color overTimeBG() { return overTimeBG; }
-	public static Color overTimeFG() { return overTimeFG; }
-	public static Color warningBG() { return warningTimeBG; }
-	public static Color warningFG() { return warningTimeFG; }
-	public static Color subjectChangeBG() { return subjectChangeBG; }
-	public static Color subjectChangeFG() { return subjectChangeFG; }
-	public static Color notesBG() { return notesBG; }
-	public static Color notesFG() { return notesFG; }
-	public static Color noStatusBG() { return noStatusBG; }
-	public static Color noStatusFG() { return noStatusFG; }
+
+	public static Color overTimeBG() {
+		return overTimeBG;
+	}
+
+	public static Color overTimeFG() {
+		return overTimeFG;
+	}
+
+	public static Color warningBG() {
+		return warningTimeBG;
+	}
+
+	public static Color warningFG() {
+		return warningTimeFG;
+	}
+
+	public static Color subjectChangeBG() {
+		return subjectChangeBG;
+	}
+
+	public static Color subjectChangeFG() {
+		return subjectChangeFG;
+	}
+
+	public static Color notesBG() {
+		return notesBG;
+	}
+
+	public static Color notesFG() {
+		return notesFG;
+	}
+
+	public static Color noStatusBG() {
+		return noStatusBG;
+	}
+
+	public static Color noStatusFG() {
+		return noStatusFG;
+	}
 
 	protected void initComponents() {
 		previewTableData = new ArrayList<>();
@@ -124,7 +157,7 @@ public class Configurations extends Window {
 		previewTableData.add(new Student("No Status", "Example notes"));
 		previewTableData.add(new Student("No Status", null));
 		previewTableModel = new PreviewTableModel(previewTableData);
-		
+
 		configurationsPanel = new JPanel();
 		timeFormatLabel = new JLabel("Time format");
 		timeFormatComboBox = new JComboBox<>();
@@ -143,19 +176,21 @@ public class Configurations extends Window {
 		centreNameTextField = new JTextField();
 		centrePhoneLabel = new JLabel("Phone number");
 		centrePhoneTextField = new JTextField();
-		
+
 		checkInTextLabel = new JLabel("Check in text");
 		checkInTextScrollPane = new JScrollPane();
 		checkInTextArea = new JTextArea();
-		checkInTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
+		checkInTextArea
+				.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
 		checkInTextArea.setLineWrap(true);
 		checkInTextArea.setWrapStyleWord(true);
 		checkInSeparator = new JSeparator();
-		
+
 		checkOutTextLabel = new JLabel("Check out text");
 		checkoutTextScrollPane = new JScrollPane();
 		checkOutTextArea = new JTextArea();
-		checkOutTextArea.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
+		checkOutTextArea
+				.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
 		checkOutTextArea.setLineWrap(true);
 		checkOutTextArea.setWrapStyleWord(true);
 		checkOutSeparator = new JSeparator();
@@ -176,7 +211,7 @@ public class Configurations extends Window {
 		notesColourLabel = new JLabel("Notes");
 		notesTextColourButton = new JButton("FG");
 		notesBGColourButton = new JButton("BG");
-		
+
 		previewPanel = new JScrollPane();
 		previewTable = new PreviewTable(previewTableModel);
 		saveButton = new JButton("Save");
@@ -254,7 +289,8 @@ public class Configurations extends Window {
 						.addGroup(GroupLayout.Alignment.TRAILING,
 								jPanel2Layout.createSequentialGroup().addComponent(centrePhoneLabel)
 										.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(centrePhoneTextField, GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+										.addComponent(centrePhoneTextField, GroupLayout.DEFAULT_SIZE, 214,
+												Short.MAX_VALUE))
 						.addComponent(checkInTextScrollPane).addComponent(checkoutTextScrollPane)
 						.addComponent(sendMessagesCheckBox)
 						.addGroup(jPanel2Layout.createSequentialGroup().addComponent(checkOutTextLabel)
@@ -300,7 +336,8 @@ public class Configurations extends Window {
 										Short.MAX_VALUE)
 								.addComponent(overTimeColourTextButton, GroupLayout.PREFERRED_SIZE, 60,
 										GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(overTimeBGColourButton,
+								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+								.addComponent(overTimeBGColourButton,
 										GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
 						.addGroup(jPanel3Layout.createSequentialGroup().addComponent(warningTimeColourLabel)
 								.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
@@ -408,8 +445,7 @@ public class Configurations extends Window {
 		checkOutTextArea.setText(Config.TEXT_OUT); // right click preview
 		timeFormatComboBox.setSelectedIndex(Config.TIME_FORMAT.equals(Config.H12) ? 0 : 1);
 		updateTimePreview();
-		
-		
+
 		pack();
 		setTitle("Configurations");
 		setVisible(true);
@@ -417,7 +453,7 @@ public class Configurations extends Window {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		getContentPane().requestFocusInWindow();
-		
+
 		overTimeColourTextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				overTimeFG = changeColour("Over Time Text", overTimeFG);
@@ -444,96 +480,105 @@ public class Configurations extends Window {
 				warningTimeBG = changeColour("Warning Time Background", warningTimeBG);
 				previewTableModel.fireTableDataChanged();
 			}
-		});		
-		
+		});
+
 		subjectChangeTextColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				subjectChangeFG = changeColour("Subject Change Text", subjectChangeFG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		subjectChangeBGColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				subjectChangeBG = changeColour("Subject Change Background", subjectChangeBG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		noStatusTextColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				noStatusFG = changeColour("No Status Text", noStatusFG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		noStatusBGColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				noStatusBG = changeColour("No Status Background", noStatusBG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		notesTextColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				notesFG = changeColour("Notes Text", notesFG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		notesBGColourButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionEvent) {
 				notesBG = changeColour("Notes Background", notesBG);
 				previewTableModel.fireTableDataChanged();
 			}
 		});
-		
+
 		checkInTextArea.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent me) { previewPopup(me, "Preview Check In Text", checkInTextArea); }
+			public void mouseClicked(MouseEvent me) {
+				previewPopup(me, "Preview Check In Text", checkInTextArea);
+			}
 		});
-		
+
 		checkOutTextArea.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent me) { previewPopup(me, "Preview Check Out Text", checkOutTextArea); }
+			public void mouseClicked(MouseEvent me) {
+				previewPopup(me, "Preview Check Out Text", checkOutTextArea);
+			}
 		});
-		
+
 		timeFormatComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateTimePreview();
 			}
 		});
-		
+
 		saveButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent me) { saveBtnMouseClicked(me); }
+			public void mousePressed(MouseEvent me) {
+				saveBtnMouseClicked(me);
+			}
 		});
-		
+
 		resetButton.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent me) { resetBtnMouseClicked(me); }
+			public void mousePressed(MouseEvent me) {
+				resetBtnMouseClicked(me);
+			}
 		});
 	}
-	
+
 	private void updateTimePreview() {
 		timeFormat = DateTimeFormatter.ofPattern(timeFormatComboBox.getSelectedIndex() == 0 ? Config.H12 : Config.H24);
 		previewLabel.setText(timeFormat.format(LocalDateTime.now()));
 	}
-	
+
 	private void saveBtnMouseClicked(MouseEvent me) {
 		boolean valid = true;
 
 		HashMap<String, String> kvp = new HashMap<>();
 		kvp.put("time_format", timeFormatComboBox.getSelectedIndex() == 0 ? Config.H12 : Config.H24);
-		
+
 		try {
 			Integer.parseInt(sessionLengthTextField.getText());
 			Integer.parseInt(warningTimeTextField.getText());
 			kvp.put("session_length", sessionLengthTextField.getText());
 			kvp.put("warning_time", warningTimeTextField.getText());
 		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Enter a numerical value (minutes) in time fields.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Enter a numerical value (minutes) in time fields.", "Invalid Input",
+					JOptionPane.WARNING_MESSAGE);
 			valid = false;
 			sessionLengthTextField.setText(Config.SESSION_LENGTH + "");
 			warningTimeTextField.setText(Config.WARNING_TIME + "");
@@ -542,62 +587,69 @@ public class Configurations extends Window {
 			e.printStackTrace();
 
 		}
-		
+
 		kvp.put("send_messages", sendMessagesCheckBox.isSelected() ? "true" : "false");
 		kvp.put("centre_name", centreNameTextField.getText());
 		kvp.put("centre_phone", centrePhoneTextField.getText());
 		kvp.put("text_in", checkInTextArea.getText());
 		kvp.put("text_out", checkOutTextArea.getText());
-		kvp.put("color_over_time_fg", "#"+Integer.toHexString(overTimeFG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_over_time_bg", "#"+Integer.toHexString(overTimeBG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_warning_time_fg", "#"+Integer.toHexString(warningTimeFG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_warning_time_bg", "#"+Integer.toHexString(warningTimeBG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_subject_change_fg", "#"+Integer.toHexString(subjectChangeFG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_subject_change_bg", "#"+Integer.toHexString(subjectChangeBG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_no_status_fg", "#"+Integer.toHexString(noStatusFG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_no_status_bg", "#"+Integer.toHexString(noStatusBG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_notes_fg", "#"+Integer.toHexString(notesFG.getRGB()).substring(2).toUpperCase());
-		kvp.put("color_notes_bg", "#"+Integer.toHexString(notesBG.getRGB()).substring(2).toUpperCase());
-		
+		kvp.put("color_over_time_fg", "#" + Integer.toHexString(overTimeFG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_over_time_bg", "#" + Integer.toHexString(overTimeBG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_warning_time_fg", "#" + Integer.toHexString(warningTimeFG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_warning_time_bg", "#" + Integer.toHexString(warningTimeBG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_subject_change_fg",
+				"#" + Integer.toHexString(subjectChangeFG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_subject_change_bg",
+				"#" + Integer.toHexString(subjectChangeBG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_no_status_fg", "#" + Integer.toHexString(noStatusFG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_no_status_bg", "#" + Integer.toHexString(noStatusBG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_notes_fg", "#" + Integer.toHexString(notesFG.getRGB()).substring(2).toUpperCase());
+		kvp.put("color_notes_bg", "#" + Integer.toHexString(notesBG.getRGB()).substring(2).toUpperCase());
+
 		ConfigDAO configurations = new ConfigDAO(kvp);
 
-//		configurations.setTimeFormat(timeFormatComboBox.getSelectedIndex() == 0 ? Config.H12 : Config.H24);
-//		try {
-//			Integer.parseInt(sessionLengthTextField.getText());
-//			Integer.parseInt(warningTimeTextField.getText());
-//			configurations.setSessionLength(sessionLengthTextField.getText());
-//			configurations.setWarningTime(warningTimeTextField.getText());
-//		} catch (NumberFormatException e) {
-//			JOptionPane.showMessageDialog(this, "Enter a numerical value (minutes) in time fields.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-//			valid = false;
-//			sessionLengthTextField.setText(Config.SESSION_LENGTH + "");
-//			warningTimeTextField.setText(Config.WARNING_TIME + "");
-//			System.err.println(e);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//
-//		}
-//		configurations.setSendMessages(sendMessagesCheckBox.isSelected());
-//		configurations.setCentre(centreNameTextField.getText());
-//		configurations.setPhone(centrePhoneTextField.getText());
-//		configurations.setTextIn(checkInTextArea.getText());
-//		configurations.setTextOut(checkOutTextArea.getText());
-//		configurations.setOverTimeFG(overTimeFG);
-//		configurations.setOverTimeBG(overTimeBG);
-//		configurations.setWarningTimeFG(warningTimeFG);
-//		configurations.setWarningTimeBG(warningTimeBG);
-//		configurations.setSubjectChangeFG(subjectChangeFG);
-//		configurations.setSubjectChangeBG(subjectChangeBG);
-//		configurations.setNoStatusFG(noStatusFG);
-//		configurations.setNoStatusBG(noStatusBG);
-//		configurations.setNotesFG(notesFG);
-//		configurations.setNotesBG(notesBG);		
-		
+		// configurations.setTimeFormat(timeFormatComboBox.getSelectedIndex() == 0 ?
+		// Config.H12 : Config.H24);
+		// try {
+		// Integer.parseInt(sessionLengthTextField.getText());
+		// Integer.parseInt(warningTimeTextField.getText());
+		// configurations.setSessionLength(sessionLengthTextField.getText());
+		// configurations.setWarningTime(warningTimeTextField.getText());
+		// } catch (NumberFormatException e) {
+		// JOptionPane.showMessageDialog(this, "Enter a numerical value (minutes) in
+		// time fields.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+		// valid = false;
+		// sessionLengthTextField.setText(Config.SESSION_LENGTH + "");
+		// warningTimeTextField.setText(Config.WARNING_TIME + "");
+		// System.err.println(e);
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		//
+		// }
+		// configurations.setSendMessages(sendMessagesCheckBox.isSelected());
+		// configurations.setCentre(centreNameTextField.getText());
+		// configurations.setPhone(centrePhoneTextField.getText());
+		// configurations.setTextIn(checkInTextArea.getText());
+		// configurations.setTextOut(checkOutTextArea.getText());
+		// configurations.setOverTimeFG(overTimeFG);
+		// configurations.setOverTimeBG(overTimeBG);
+		// configurations.setWarningTimeFG(warningTimeFG);
+		// configurations.setWarningTimeBG(warningTimeBG);
+		// configurations.setSubjectChangeFG(subjectChangeFG);
+		// configurations.setSubjectChangeBG(subjectChangeBG);
+		// configurations.setNoStatusFG(noStatusFG);
+		// configurations.setNoStatusBG(noStatusBG);
+		// configurations.setNotesFG(notesFG);
+		// configurations.setNotesBG(notesBG);
+
 		if (valid)
 			configurations.update();
-		JOptionPane.showMessageDialog(null, String.format("<html><body style='width: %1spx' align='center'>%1s", 300, "Configurations updated.  Restart program to apply changes."), "Update Succeeded", JOptionPane.PLAIN_MESSAGE);
+		JOptionPane.showMessageDialog(null,
+				String.format("<html><body style='width: %1spx' align='center'>%1s", 300,
+						"Configurations updated.  Restart program to apply changes."),
+				"Update Succeeded", JOptionPane.PLAIN_MESSAGE);
 	}
-	
+
 	private void resetBtnMouseClicked(MouseEvent me) {
 		initialValues();
 		timeFormat = DateTimeFormatter.ofPattern(Config.TIME_FORMAT);
@@ -612,47 +664,48 @@ public class Configurations extends Window {
 		timeFormatComboBox.setSelectedIndex(Config.TIME_FORMAT.equals(Config.H12) ? 0 : 1);
 		previewTableModel.fireTableDataChanged();
 	}
-	
+
 	private void previewPopup(MouseEvent me, String title, JTextArea textArea) {
 		if (SwingUtilities.isRightMouseButton(me)) {
 			JPopupMenu previewMenu = new JPopupMenu();
 			JMenuItem previewPopupWithText = new JMenuItem("Preview");
-			previewPopupWithText.addMouseListener(new MouseAdapter( ) {
+			previewPopupWithText.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mousePressed(MouseEvent me) {
 					if (!SwingUtilities.isRightMouseButton(me)) {
-						JOptionPane.showMessageDialog(null, String.format("<html><body style='width: %1spx' align='center'>%1s", 300, new TextConverter("Firstname", "Lastname").convertText(textArea.getText())), title, JOptionPane.PLAIN_MESSAGE);
+						JOptionPane.showMessageDialog(null,
+								String.format("<html><body style='width: %1spx' align='center'>%1s", 300,
+										new TextConverter("Firstname", "Lastname").convertText(textArea.getText())),
+								title, JOptionPane.PLAIN_MESSAGE);
 					}
 				}
 			});
 			previewMenu.add(previewPopupWithText);
-			previewMenu.show(textArea, me.getPoint().x, me.getPoint().y);				
+			previewMenu.show(textArea, me.getPoint().x, me.getPoint().y);
 		}
 	}
-	
+
 	private Color changeColour(String title, Color oldColour) {
 		Color newColour = JColorChooser.showDialog(this, title, oldColour);
 		return newColour != null ? newColour : oldColour;
 	}
 }
 
-
-
 /**
- * Table holding signed in students 
+ * Table holding signed in students
+ * 
  * @author Maurine
  *
  */
 class PreviewTableModel extends DefaultTableModel {
-	
-	
+
 	private static final long serialVersionUID = 1L;
 	private List<Student> rows;
-	
+
 	public PreviewTableModel(List<Student> rows) {
 		this.rows = rows;
 	}
-	
+
 	@Override
 	public int getRowCount() {
 		return rows == null ? 0 : rows.size();
@@ -662,14 +715,14 @@ class PreviewTableModel extends DefaultTableModel {
 	public int getColumnCount() {
 		return 2;
 	}
-		
+
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
-		case 0:
-			return rows.get(rowIndex).getFName();
-		case 1:
-			return rows.get(rowIndex).getNotes();
+			case 0:
+				return rows.get(rowIndex).getFName();
+			case 1:
+				return rows.get(rowIndex).getNotes();
 		}
 		return null;
 	}
@@ -677,10 +730,10 @@ class PreviewTableModel extends DefaultTableModel {
 	@Override
 	public String getColumnName(int columnIndex) {
 		switch (columnIndex) {
-		case 0:
-			return "Name";
-		case 1:
-			return "Notes";
+			case 0:
+				return "Name";
+			case 1:
+				return "Notes";
 		}
 		return null;
 	}
@@ -691,7 +744,6 @@ class PreviewTableModel extends DefaultTableModel {
 	}
 }
 
-
 /**
  * 
  * @author Maurine
@@ -700,17 +752,19 @@ class PreviewTableModel extends DefaultTableModel {
 class PreviewTable extends ProgramTable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public PreviewTable(DefaultTableModel model) {
 		super(model);
 	}
-	
+
 	@Override
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component comp = super.prepareRenderer(renderer, row, column);
 		Color background = this.getBackground();
 		Color foreground = this.getForeground();
-		String studentNotes = (String) this.getModel().getValueAt(convertRowIndexToModel(row), 1); // toString() requires object to not be null
+		String studentNotes = (String) this.getModel().getValueAt(convertRowIndexToModel(row), 1); // toString()
+																									// requires object
+																									// to not be null
 		String status = this.getModel().getValueAt(convertRowIndexToModel(row), 0).toString(); // name
 
 		if (column == 1 && studentNotes != null && studentNotes.length() > 0) {

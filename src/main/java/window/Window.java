@@ -12,16 +12,17 @@ public abstract class Window extends JFrame {
 	/**	 */
 	private static final long serialVersionUID = 1L;
 
+	protected final static String BASE = "img\\";
 	protected List<Image> icons = new ArrayList<>();
 
-	public Window() { 
-		icons.add(new ImageIcon(Window.class.getResource("ICON16.png")).getImage());
-		icons.add(new ImageIcon(Window.class.getResource("ICON32.png")).getImage());
-		icons.add(new ImageIcon(Window.class.getResource("ICON64.png")).getImage());
-		icons.add(new ImageIcon(Window.class.getResource("ICON128.png")).getImage());
+	public Window() {
+		icons.add(new ImageIcon(Window.class.getResource(BASE + "ICON16.png")).getImage());
+		icons.add(new ImageIcon(Window.class.getResource(BASE + "ICON32.png")).getImage());
+		icons.add(new ImageIcon(Window.class.getResource(BASE + "ICON64.png")).getImage());
+		icons.add(new ImageIcon(Window.class.getResource(BASE + "ICON128.png")).getImage());
 		setIconImages(icons);
 	}
-	
+
 	protected abstract void initComponents();
-	
+
 }

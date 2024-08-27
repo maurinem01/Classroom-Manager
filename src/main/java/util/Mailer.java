@@ -37,6 +37,12 @@ import java.util.Set;
 import static com.google.api.services.gmail.GmailScopes.GMAIL_SEND;
 import static javax.mail.Message.RecipientType.TO;
 
+/**
+ * This class contains the HTTP functions used by the program to call Gmail and
+ * construct/send email notifications to the instructor.
+ * 
+ * @author Maurine
+ */
 public class Mailer {
 
 	private static final String TO_EMAIL = Config.getCredentials().get("alert_email");

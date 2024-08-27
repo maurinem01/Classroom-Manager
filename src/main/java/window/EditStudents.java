@@ -44,12 +44,12 @@ import javax.swing.table.TableRowSorter;
 import dao.ContactDAO;
 import dao.IndicatorDAO;
 import dao.StudentDAO;
-import object.Contact;
-import object.Indicator;
-import object.Student;
-import object.Subject;
 import util.LeftPaneTableModel;
-import util.ProgramException;
+import exception.InvalidInputException;
+import model.Contact;
+import model.Indicator;
+import model.Student;
+import model.Subject;
 import util.ProgramTable;
 import util.SorterFilter;
 
@@ -710,7 +710,7 @@ public class EditStudents extends Window {
 							|| (studentLastNameTextField.getText().trim().isEmpty())) {
 						validSave = false;
 						JOptionPane.showMessageDialog(null, "Enter a valid name.", "Error", JOptionPane.ERROR_MESSAGE);
-						throw new ProgramException("Name field must be filled");
+						throw new InvalidInputException("Name field must be filled");
 					}
 
 					if (studentTagTextField.getText().trim().isEmpty())
@@ -721,7 +721,7 @@ public class EditStudents extends Window {
 						validSave = false;
 						JOptionPane.showMessageDialog(null, "Tag must be 2 characters.", "Error",
 								JOptionPane.ERROR_MESSAGE);
-						throw new ProgramException("Invalid tag entered");
+						throw new InvalidInputException("Invalid tag entered");
 					}
 
 					// MAKE SURE VALID NOTES EXPIRY
@@ -731,7 +731,7 @@ public class EditStudents extends Window {
 							validSave = false;
 							JOptionPane.showMessageDialog(null, "Enter an expiry for this note.", "Error",
 									JOptionPane.ERROR_MESSAGE);
-							throw new ProgramException("If note is filled, expiry text field must be filled");
+							throw new InvalidInputException("If note is filled, expiry text field must be filled");
 						}
 					}
 
@@ -744,7 +744,7 @@ public class EditStudents extends Window {
 						validSave = false;
 						JOptionPane.showMessageDialog(null, "Enter a valid birthday.", "Error",
 								JOptionPane.ERROR_MESSAGE);
-						throw new ProgramException("Birthday values must be parseable to Integer");
+						throw new InvalidInputException("Birthday values must be parseable to Integer");
 					}
 
 					if (studentSubject.getSelection() != null) {
@@ -758,7 +758,7 @@ public class EditStudents extends Window {
 						validSave = false;
 						JOptionPane.showMessageDialog(null, "Enter a valid subject.", "Error",
 								JOptionPane.ERROR_MESSAGE);
-						throw new ProgramException("No subject chosen");
+						throw new InvalidInputException("No subject chosen");
 					}
 
 					if (validSave) {
@@ -792,7 +792,7 @@ public class EditStudents extends Window {
 						}
 					}
 
-				} catch (ProgramException e) {
+				} catch (InvalidInputException e) {
 					System.err.println(e);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -881,9 +881,9 @@ public class EditStudents extends Window {
 					} else {
 						JOptionPane.showMessageDialog(null, "Select a student to delete.", "No Selection",
 								JOptionPane.WARNING_MESSAGE);
-						throw new ProgramException("Student must be selected in order to delete");
+						throw new InvalidInputException("Student must be selected in order to delete");
 					}
-				} catch (ProgramException e) {
+				} catch (InvalidInputException e) {
 					System.err.println(e);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1025,13 +1025,13 @@ public class EditStudents extends Window {
 						&& (phoneField.getText().trim().isEmpty()) && (emailField.getText().trim().isEmpty())) {
 					contactDAO.delete(contact);
 				} else {
-					JOptionPane.showMessageDialog(this, "Contact name fields be filled.", "Error",
+					JOptionPane.showMessageDialog(this, "Contact name fields must be filled.", "Error",
 							JOptionPane.ERROR_MESSAGE);
-					throw new ProgramException("Invalid update action");
+					throw new InvalidInputException("Contact name fields must be filled");
 				}
 			}
 
-		} catch (ProgramException e) {
+		} catch (InvalidInputException e) {
 			System.err.println(e);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1054,7 +1054,7 @@ public class EditStudents extends Window {
 						new Contact(firstNameField.getText(), lastNameField.getText(), phone, email, notifications,
 								studentID, relID));
 			}
-		} catch (ProgramException e) {
+		} catch (InvalidInputException e) {
 			System.err.println(e);
 		} catch (Exception e) {
 			e.printStackTrace();
