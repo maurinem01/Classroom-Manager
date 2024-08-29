@@ -60,6 +60,10 @@ public final class Config {
 
 	private static ConfigDAO config = new ConfigDAO();
 
+	public final static String ACUITY_USER = credentials.get("acuity_user_id");
+
+	public final static String ACUITY_KEY = credentials.get("acuity_api_key");
+
 	/**
 	 * System's time format. (See {@link dao.ConfigDAO#timeFormat} for more
 	 * information)
@@ -81,7 +85,7 @@ public final class Config {
 	/** Default setting for whether text notifications are sent */
 	public final static boolean SEND_MESSAGES = config.getSendMessages();
 
-	public final static boolean LINK_ACUITY = config.getLinkAcuity();
+	public final static boolean LINK_ACUITY = config.getLinkAcuity() && !ACUITY_USER.isBlank() && !ACUITY_KEY.isBlank();
 
 	/** Centre's name to be used in text notifications */
 	public final static String CENTRE_NAME = config.getCentre();

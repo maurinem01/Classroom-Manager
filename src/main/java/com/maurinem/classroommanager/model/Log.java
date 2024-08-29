@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import com.maurinem.classroommanager.util.Config;
+
 public class Log {
 
 	private int id;
@@ -88,7 +90,7 @@ public class Log {
 	}
 
 	public Appointment getAppointment() {
-		return appointment;
+		return Config.LINK_ACUITY ? appointment : null;
 	}
 
 	/**

@@ -32,8 +32,8 @@ import com.maurinem.classroommanager.model.Appointment;
  */
 public class AcuityHttpClient {
 
-	private static String USER = Config.getCredentials().get("acuity_user_id");
-	private static String TOKEN = Config.getCredentials().get("acuity_api_key");
+	// private static String USER = Config.getCredentials().get("acuity_user_id");
+	// private static String TOKEN = Config.getCredentials().get("acuity_api_key");
 	private static HttpClient httpClient = HttpClient.newHttpClient();
 	private static Map<String, String> replace = new HashMap<>();
 
@@ -47,7 +47,7 @@ public class AcuityHttpClient {
 	}
 
 	private static final String getBasicAuthenticationHeader() {
-		String valueToEncode = USER + ":" + TOKEN;
+		String valueToEncode = Config.ACUITY_USER + ":" + Config.ACUITY_KEY;
 		return "Basic " + Base64.getEncoder().encodeToString(valueToEncode.getBytes());
 	}
 

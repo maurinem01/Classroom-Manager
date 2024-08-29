@@ -30,13 +30,11 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-/////////////////////////////////////////////////////////////////////////////////////////
 import java.util.concurrent.Executors;
 import com.twilio.Twilio;
 import com.twilio.exception.ApiException;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
-/////////////////////////////////////////////////////////////////////////////////////////
 
 import com.maurinem.classroommanager.dao.IndicatorDAO;
 import com.maurinem.classroommanager.dao.LogDAO;
@@ -125,29 +123,24 @@ public class Checkin extends Window {
 			@Override
 			public void windowClosing(WindowEvent we) {
 				endClass();
-				// if (!sent) {
-				// sent = true;
-				if (Config.LINK_ACUITY) { // Create and email log
-					if (Config.SEND_EMAIL) {
-						try {
-							new Mailer().sendAttachment(
-									"CLASS LOG FOR " + LocalDateTime.now()
-											.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")).toUpperCase(),
-									"",
-									new PDFWriter().writeLog());
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					} else { // Create log only
-						try {
-							new PDFWriter().writeLog();
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						}
+				if (Config.SEND_EMAIL) {
+					try {
+						new Mailer().sendAttachment(
+								"CLASS LOG FOR " + LocalDateTime.now()
+										.format(DateTimeFormatter.ofPattern("MMM dd, yyyy")).toUpperCase(),
+								"",
+								new PDFWriter().writeLog());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				} else { // Create log only
+					try {
+						new PDFWriter().writeLog();
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
 					}
 				}
 			}
-			// }
 		});
 	}
 
@@ -546,9 +539,6 @@ public class Checkin extends Window {
 
 				if (allStudentsMap.get(keyToCheck).isBirthdayToday())
 					messages.append("Happy birthday, " + allStudentsMap.get(keyToCheck).getFName() + "!\n");
-				// else if (allStudentsMap.get(keyToCheck).birthdayAlert())
-				// messages.append(allStudentsMap.get(keyToCheck).getFName() + "'s birthday is
-				// on " + allStudentsMap.get(keyToCheck).getBirthday().substring(0, 5) +".\n");
 
 				if (sendNotificationTexts)
 					Executors.newSingleThreadExecutor().execute(new SendMessage(keyToCheck, Config.TEXT_IN));
