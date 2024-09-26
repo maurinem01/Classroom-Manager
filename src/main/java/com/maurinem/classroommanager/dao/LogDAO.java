@@ -75,7 +75,7 @@ public class LogDAO {
 		try (PreparedStatement stmt = DBConnection.getConn().prepareStatement(SAVE_APPT,
 				Statement.RETURN_GENERATED_KEYS)) {
 			stmt.setTimestamp(1, log.getAppointmentTime() != null ? Timestamp.valueOf(log.getAppointmentTime()) : null);
-			stmt.setBoolean(2, log.checkAppointment());
+			stmt.setBoolean(2, log.isOnTime());
 			stmt.setInt(3, log.getID());
 			int result = stmt.executeUpdate();
 

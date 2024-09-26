@@ -622,7 +622,7 @@ public class Checkin extends Window {
 
 				if (appointment != null) {
 					log.setAppointment(appointment);
-					onTime = log.checkAppointment();
+					onTime = log.isOnTime();
 				}
 
 				LocalTime logTime = log.getSignIn().toLocalTime();
@@ -686,13 +686,21 @@ public class Checkin extends Window {
 		private static final long serialVersionUID = 1L;
 		private HashMap<Integer, Student> studentMap;
 
-		private ImageIcon birthday, birthday2, birthday3, warning;
+		private ImageIcon birthday, birthday2, birthday3, warnPriorYellow, warnPriorGreen, warnAfterGreen,
+				warnAfterYellow, warnNoApp;
 
 		public CheckedInStudentsTableModel(HashMap<Integer, Student> studentMap) {
 			this.birthday = new ImageIcon(getClass().getResource(BASE + "GIFT.png"));
 			this.birthday2 = new ImageIcon(getClass().getResource(BASE + "GIFT2.png"));
 			this.birthday3 = new ImageIcon(getClass().getResource(BASE + "GIFT3.png"));
-			this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.png"));
+			// this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.png"));
+
+			this.warnPriorYellow = new ImageIcon(getClass().getResource(BASE + "WARNING_PRIOR_YELLOW.png"));
+			this.warnPriorGreen = new ImageIcon(getClass().getResource(BASE + "WARNING_PRIOR_GREEN.png"));
+			this.warnAfterGreen = new ImageIcon(getClass().getResource(BASE + "WARNING_AFTER_GREEN.png"));
+			this.warnAfterYellow = new ImageIcon(getClass().getResource(BASE + "WARNING_AFTER_YELLOW.png"));
+			this.warnNoApp = new ImageIcon(getClass().getResource(BASE + "WARNING_NO_APPOINTMENT.png"));
+
 			this.studentMap = studentMap;
 		}
 
@@ -724,7 +732,19 @@ public class Checkin extends Window {
 				case 2:
 					return student.getIndicatorID() != 401 ? "●" : "";
 				case 3:
-					return !student.isOnTime() ? warning : null;
+					switch (student.getAppointmentStatus()) {
+						case Log.PRIOR_YELLOW:
+							return warnPriorYellow;
+						case Log.PRIOR_GREEN:
+							return warnPriorGreen;
+						case Log.AFTER_GREEN:
+							return warnAfterGreen;
+						case Log.AFTER_YELLOW:
+							return warnAfterYellow;
+						case Log.NO_APPOINTMENT:
+							return warnNoApp;
+					}
+					return null;
 				case 4:
 					return student.getName();
 				case 5:

@@ -28,18 +28,21 @@ public class Student extends Person {
 	 */
 	private static final int WITH_NOTES = -50;
 
-	private LocalDateTime timeIn, timeOut;
-
 	private String birthday, tag, notes;
 	private String[] contactPhones;
 	private int subjectID, indicatorID;
-	private boolean signedIn, isOnTime;
 
 	private DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(Config.TIME_FORMAT);
 	private DateTimeFormatter birthdayFormat = DateTimeFormatter.ofPattern("MM-dd");
 	private HashMap<Integer, Contact> contacts;
 
 	private LocalDateTime notesExpiryDate;
+
+	// does not persist
+	private LocalDateTime timeIn, timeOut;
+	private boolean signedIn;
+	// private boolean isOnTime;
+	private int appointmentStatus;
 
 	/** This will be used for creating new Student from StudentProcessor */
 	public Student() {
@@ -91,7 +94,8 @@ public class Student extends Person {
 
 	private void setValues(String tag, String birthday, int subjectID, String notes,
 			LocalDateTime notesExpiryDate, String contactPhones[], int indicatorID) {
-		isOnTime = true;
+		// isOnTime = true;
+		appointmentStatus = Log.NO_APPOINTMENT;
 		setTag(tag);
 		setBirthday(birthday);
 		setSubjectID(subjectID);
@@ -233,22 +237,22 @@ public class Student extends Person {
 		int month = birthday != null && birthday.length() > 0 ? Integer.parseInt(birthday.substring(0, 2)) : 0;
 		int day = birthday != null && birthday.length() > 0 ? Integer.parseInt(birthday.substring(3, 5)) : 0;
 		LocalDate birthdayDate = LocalDate.of(year, month, day);
-		;
+
 		return (int) java.time.temporal.ChronoUnit.DAYS.between(birthdayDate, LocalDate.now());
 	}
 
+	// grab stats from checkappointment and route to checkin.java
 	public void checkAppointment() {
 		Executors.newSingleThreadExecutor().execute(() -> {
 			Log log;
 			Appointment appointment;
-			Student student = this;
 			try {
 				log = new Log(this);
 				appointment = AcuityHttpClient.getAppointment(timeIn, fName, lName);
 				if (appointment != null) {
 					log.setAppointment(appointment);
 				}
-				student.setOnTime(appointment != null && log.checkAppointment());
+				this.appointmentStatus = log.compareAppointment();
 			} catch (IOException | InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -285,11 +289,8 @@ public class Student extends Person {
 		this.indicatorID = indicatorID;
 	}
 
-	public boolean isOnTime() {
-		return isOnTime;
+	public int getAppointmentStatus() {
+		return appointmentStatus;
 	}
 
-	public void setOnTime(boolean isOnTime) {
-		this.isOnTime = isOnTime;
-	}
 }

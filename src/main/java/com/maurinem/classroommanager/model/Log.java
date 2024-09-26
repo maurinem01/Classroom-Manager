@@ -10,6 +10,12 @@ import com.maurinem.classroommanager.util.Config;
 
 public class Log {
 
+	public final static int PRIOR_YELLOW = -15;
+	public final static int PRIOR_GREEN = -10;
+	public final static int AFTER_GREEN = 10;
+	public final static int AFTER_YELLOW = 15;
+	public final static int NO_APPOINTMENT = 99;
+
 	private int id;
 	private LocalDateTime signIn, signOut, appointmentTime;
 	private Appointment appointment;
@@ -112,32 +118,56 @@ public class Log {
 		}
 	}
 
+	public boolean isOnTime() {
+		compareAppointment();
+		return this.onTime;
+	}
+
 	/**
 	 * @return true if same first name, last name, appointment and log time are
 	 *         within 15 minutes, same am/pm
 	 */
-	public boolean checkAppointment() {
+	public int compareAppointment() {
 		LocalTime apptTime, logTime;
-		boolean sameFirstName, sameLastName, withinFifteenMins, sameAmPm;
+		boolean sameFirstName, sameLastName, sameAmPm, withinFifteenMins;
+		int status;
+		long timeBetween;
 
 		logTime = signIn.toLocalTime();
 		sameFirstName = false;
 		sameLastName = false;
-		withinFifteenMins = false;
 		sameAmPm = false;
+		timeBetween = 0;
+		withinFifteenMins = false;
+		status = NO_APPOINTMENT;
 
 		if (appointment != null) {
 			apptTime = appointmentTime.toLocalTime();
 			sameFirstName = appointment.getFirstName().toLowerCase().equals(student.getFName().toLowerCase());
 			sameLastName = appointment.getLastName().toLowerCase().equals(student.getLName().toLowerCase());
-			withinFifteenMins = Math.abs((Duration.between(apptTime, logTime).getSeconds()) / 60) <= 15;
+			sameAmPm = getTimeComponents(formatTime(signIn))[2]
+					.equals(getTimeComponents(formatTime(appointmentTime))[2]);
+			timeBetween = (Duration.between(apptTime, logTime).getSeconds()) / 60;
+			withinFifteenMins = Math.abs(timeBetween) <= 15;
 			sameAmPm = getTimeComponents(formatTime(signIn))[2]
 					.equals(getTimeComponents(formatTime(appointmentTime))[2]);
 		}
 
 		this.onTime = sameFirstName && sameLastName && withinFifteenMins && sameAmPm;
 
-		return onTime;
+		if (sameFirstName && sameLastName && sameAmPm) {
+			if (timeBetween <= -15) {
+				status = PRIOR_YELLOW;
+			} else if (timeBetween < -10 && timeBetween > -15) {
+				status = PRIOR_GREEN;
+			} else if (timeBetween > 10 && timeBetween < 15) {
+				status = AFTER_GREEN;
+			} else if (timeBetween >= 15) {
+				status = AFTER_YELLOW;
+			}
+		}
+
+		return status;
 	}
 
 	public boolean getOnTime() {
