@@ -692,7 +692,7 @@ public class Checkin extends Window {
 			this.birthday = new ImageIcon(getClass().getResource(BASE + "GIFT.png"));
 			this.birthday2 = new ImageIcon(getClass().getResource(BASE + "GIFT2.png"));
 			this.birthday3 = new ImageIcon(getClass().getResource(BASE + "GIFT3.png"));
-			this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.gif"));
+			this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.png"));
 			this.studentMap = studentMap;
 		}
 
