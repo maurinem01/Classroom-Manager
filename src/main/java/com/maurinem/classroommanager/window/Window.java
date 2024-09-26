@@ -12,7 +12,7 @@ public abstract class Window extends JFrame {
 	/**	 */
 	private static final long serialVersionUID = 1L;
 
-	protected final static String BASE = "img\\";
+	protected final static String BASE = "";
 	protected List<Image> icons = new ArrayList<>();
 
 	public Window() {
