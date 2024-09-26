@@ -224,15 +224,9 @@ public class Student extends Person {
 		return birthday != null && birthday.length() > 0
 				? birthday.substring(0, 5).equals(birthdayFormat.format(LocalDateTime.now()))
 				: false;
-		// return birthday != null && birthday.length() > 0 &&
-		// birthday.substring(0,5).equals(birthdayFormat.format(LocalDateTime.now()));
-		// // More elegant but less legible????
 	}
 
 	public int daysUntilBirthday() {
-		// String birthdayStr = birthday != null && birthday.length() > 0 ?
-		// birthday.substring(0,5) : "";
-
 		int year = LocalDateTime.now().getYear();
 		int month = birthday != null && birthday.length() > 0 ? Integer.parseInt(birthday.substring(0, 2)) : 0;
 		int day = birthday != null && birthday.length() > 0 ? Integer.parseInt(birthday.substring(3, 5)) : 0;
@@ -264,17 +258,13 @@ public class Student extends Person {
 		return getName() + " - " + getSubject();
 	}
 
-	/////////////////////////////////////////////////////////////////////
-	/** Used for CSV -> DB */
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	/** Used for CSV -> DB */
 	public String getBirthday() {
 		return birthday;
 	}
-	/////////////////////////////////////////////////////////////////////
 
 	@Override
 	public int hashCode() {
