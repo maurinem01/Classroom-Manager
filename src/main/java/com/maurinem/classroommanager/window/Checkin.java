@@ -635,7 +635,7 @@ public class Checkin extends Window {
 				} else {
 					studentSystemLog.getLogger().info(
 							log.getStudent().getName() + " - Signed in: " + logTime.toString().substring(0, 5)
-									+ " - No appointment scheduled");
+									+ " - Appointment not found");
 				}
 
 				// GENERATE EMAIL
@@ -643,7 +643,7 @@ public class Checkin extends Window {
 					String date = log.getSignIn().getMonth() + " " + log.getSignIn().getDayOfMonth() + ", "
 							+ log.getSignIn().getYear();
 					String studentName = log.getStudent().getName();
-					String appointmentTimeStr = appointment != null ? appointment.getTime() : "Not scheduled";
+					String appointmentTimeStr = appointment != null ? appointment.getTime() : "Not found";
 					String signInTime = Log.formatTime(log.getSignIn());
 					String email = appointment != null && appointment.getEmail() != null
 							&& !appointment.getEmail().trim().isEmpty()
@@ -686,8 +686,8 @@ public class Checkin extends Window {
 		private static final long serialVersionUID = 1L;
 		private HashMap<Integer, Student> studentMap;
 
-		private ImageIcon birthday, birthday2, birthday3, warnPriorYellow, warnPriorGreen, warnAfterGreen,
-				warnAfterYellow, warnNoApp;
+		private ImageIcon birthday, birthday2, birthday3, warnPriorRed, warnPriorYellow, warnPriorGreen, warnAfterGreen,
+				warnAfterYellow, warnAfterRed, warnNotFound;
 
 		public CheckedInStudentsTableModel(HashMap<Integer, Student> studentMap) {
 			this.birthday = new ImageIcon(getClass().getResource(BASE + "GIFT.png"));
@@ -695,11 +695,13 @@ public class Checkin extends Window {
 			this.birthday3 = new ImageIcon(getClass().getResource(BASE + "GIFT3.png"));
 			// this.warning = new ImageIcon(getClass().getResource(BASE + "WARNING.png"));
 
+			this.warnPriorRed = new ImageIcon(getClass().getResource(BASE + "WARNING_PRIOR_RED.png"));
 			this.warnPriorYellow = new ImageIcon(getClass().getResource(BASE + "WARNING_PRIOR_YELLOW.png"));
 			this.warnPriorGreen = new ImageIcon(getClass().getResource(BASE + "WARNING_PRIOR_GREEN.png"));
 			this.warnAfterGreen = new ImageIcon(getClass().getResource(BASE + "WARNING_AFTER_GREEN.png"));
 			this.warnAfterYellow = new ImageIcon(getClass().getResource(BASE + "WARNING_AFTER_YELLOW.png"));
-			this.warnNoApp = new ImageIcon(getClass().getResource(BASE + "WARNING_NO_APPOINTMENT.png"));
+			this.warnAfterRed = new ImageIcon(getClass().getResource(BASE + "WARNING_AFTER_RED.png"));
+			this.warnNotFound = new ImageIcon(getClass().getResource(BASE + "WARNING_NOT_FOUND.png"));
 
 			this.studentMap = studentMap;
 		}
@@ -734,16 +736,20 @@ public class Checkin extends Window {
 				case 3:
 					if (Config.LINK_ACUITY) {
 						switch (student.getAppointmentStatus()) {
-							case Log.PRIOR_YELLOW:
+							case Log.TOO_EARLY:
+								return warnPriorRed;
+							case Log.VERY_EARLY:
 								return warnPriorYellow;
-							case Log.PRIOR_GREEN:
+							case Log.EARLY:
 								return warnPriorGreen;
-							case Log.AFTER_GREEN:
+							case Log.LATE:
 								return warnAfterGreen;
-							case Log.AFTER_YELLOW:
+							case Log.VERY_LATE:
 								return warnAfterYellow;
-							case Log.NO_APPOINTMENT:
-								return warnNoApp;
+							case Log.TOO_LATE:
+								return warnAfterRed;
+							case Log.NOT_FOUND:
+								return warnNotFound;
 						}
 					}
 					return null;

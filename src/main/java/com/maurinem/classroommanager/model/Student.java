@@ -95,7 +95,7 @@ public class Student extends Person {
 	private void setValues(String tag, String birthday, int subjectID, String notes,
 			LocalDateTime notesExpiryDate, String contactPhones[], int indicatorID) {
 		// isOnTime = true;
-		appointmentStatus = Log.NO_APPOINTMENT;
+		appointmentStatus = Log.NO_STATUS;
 		setTag(tag);
 		setBirthday(birthday);
 		setSubjectID(subjectID);

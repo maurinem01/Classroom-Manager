@@ -10,11 +10,14 @@ import com.maurinem.classroommanager.util.Config;
 
 public class Log {
 
-	public final static int PRIOR_YELLOW = -15;
-	public final static int PRIOR_GREEN = -10;
-	public final static int AFTER_GREEN = 10;
-	public final static int AFTER_YELLOW = 15;
-	public final static int NO_APPOINTMENT = 99;
+	public final static int TOO_EARLY = -25;
+	public final static int VERY_EARLY = -15;
+	public final static int EARLY = -10;
+	public final static int LATE = 10;
+	public final static int VERY_LATE = 15;
+	public final static int TOO_LATE = 25;
+	public final static int NOT_FOUND = 404;
+	public final static int NO_STATUS = 0;
 
 	private int id;
 	private LocalDateTime signIn, signOut, appointmentTime;
@@ -129,7 +132,7 @@ public class Log {
 	 */
 	public int compareAppointment() {
 		LocalTime apptTime, logTime;
-		boolean sameFirstName, sameLastName, sameAmPm, withinFifteenMins;
+		boolean sameFirstName, sameLastName, sameAmPm, withinAppointment;
 		int status;
 		long timeBetween;
 
@@ -138,8 +141,8 @@ public class Log {
 		sameLastName = false;
 		sameAmPm = false;
 		timeBetween = 0;
-		withinFifteenMins = false;
-		status = NO_APPOINTMENT;
+		withinAppointment = false;
+		status = NO_STATUS;
 
 		if (appointment != null) {
 			apptTime = appointmentTime.toLocalTime();
@@ -148,24 +151,32 @@ public class Log {
 			sameAmPm = getTimeComponents(formatTime(signIn))[2]
 					.equals(getTimeComponents(formatTime(appointmentTime))[2]);
 			timeBetween = (Duration.between(apptTime, logTime).getSeconds()) / 60;
-			withinFifteenMins = Math.abs(timeBetween) <= 15;
+			withinAppointment = Math.abs(timeBetween) <= 25;
 			sameAmPm = getTimeComponents(formatTime(signIn))[2]
 					.equals(getTimeComponents(formatTime(appointmentTime))[2]);
+		} else {
+			status = NOT_FOUND;
 		}
 
-		this.onTime = sameFirstName && sameLastName && withinFifteenMins && sameAmPm;
+		this.onTime = sameFirstName && sameLastName && withinAppointment && sameAmPm;
 
-		if (sameFirstName && sameLastName && sameAmPm) {
-			if (timeBetween <= -15) {
-				status = PRIOR_YELLOW;
+		if (sameFirstName && sameLastName) {
+			if (timeBetween < -25) {
+				status = TOO_EARLY;
+			} else if (timeBetween <= -15 && timeBetween >= -25) {
+				status = VERY_EARLY;
 			} else if (timeBetween < -10 && timeBetween > -15) {
-				status = PRIOR_GREEN;
+				status = EARLY;
 			} else if (timeBetween > 10 && timeBetween < 15) {
-				status = AFTER_GREEN;
-			} else if (timeBetween >= 15) {
-				status = AFTER_YELLOW;
+				status = LATE;
+			} else if (timeBetween >= 15 && timeBetween <= 25) {
+				status = VERY_LATE;
+			} else if (timeBetween > 25) {
+				status = TOO_LATE;
 			}
 		}
+
+		System.out.println("timeBetween=" + timeBetween + ", status=" + status);
 
 		return status;
 	}
