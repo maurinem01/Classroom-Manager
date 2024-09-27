@@ -732,17 +732,19 @@ public class Checkin extends Window {
 				case 2:
 					return student.getIndicatorID() != 401 ? "●" : "";
 				case 3:
-					switch (student.getAppointmentStatus()) {
-						case Log.PRIOR_YELLOW:
-							return warnPriorYellow;
-						case Log.PRIOR_GREEN:
-							return warnPriorGreen;
-						case Log.AFTER_GREEN:
-							return warnAfterGreen;
-						case Log.AFTER_YELLOW:
-							return warnAfterYellow;
-						case Log.NO_APPOINTMENT:
-							return warnNoApp;
+					if (Config.LINK_ACUITY) {
+						switch (student.getAppointmentStatus()) {
+							case Log.PRIOR_YELLOW:
+								return warnPriorYellow;
+							case Log.PRIOR_GREEN:
+								return warnPriorGreen;
+							case Log.AFTER_GREEN:
+								return warnAfterGreen;
+							case Log.AFTER_YELLOW:
+								return warnAfterYellow;
+							case Log.NO_APPOINTMENT:
+								return warnNoApp;
+						}
 					}
 					return null;
 				case 4:
