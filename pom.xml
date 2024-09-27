@@ -5,10 +5,10 @@
 
 	<groupId>com.maurinem</groupId>
 	<artifactId>ClassroomManager</artifactId>
-	<version>1.1</version>
+	<version>1.2</version>
 
 	<name>ClassroomManager</name>
-	<url>https://github.com/maurinem01/Classroom-Manager</url>
+	<url>https://classroom-manager.maurinem.com/</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
