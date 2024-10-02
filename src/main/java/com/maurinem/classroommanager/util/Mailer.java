@@ -146,7 +146,6 @@ public class Mailer {
 						throw e;
 					}
 				}
-				System.out.println("SENT CLASS LOG");
 			} catch (MessagingException e) {
 				// POPUP??
 				e.printStackTrace();

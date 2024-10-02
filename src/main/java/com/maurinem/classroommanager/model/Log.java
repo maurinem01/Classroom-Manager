@@ -176,8 +176,6 @@ public class Log {
 			}
 		}
 
-		System.out.println("timeBetween=" + timeBetween + ", status=" + status);
-
 		return status;
 	}
 
